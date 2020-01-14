@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\lab0_setup\Build\Lab0_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\lab0_setup\BasicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\lab0_setup\Lab0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\lab0_setup\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\lab0_setup\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6BDF912B-3C9B-30CA-BBDC-C8AAE6F7C3F8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
