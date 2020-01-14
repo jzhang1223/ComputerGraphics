@@ -13,9 +13,11 @@
 - Did you collaborate with any other students/TAs/Professors?
   No
 - Did you use any external resources? (Cite them below)
-  No
+No
 - (Optional) What was your favorite part of the lab?
+
 - (Optional) How would you improve the lab?
+Part 1 of the lab may need a better explanation for the tutorial. It would also help to have a "happy path" using CMake based on what you suggested during the lab (ex. using the GUI).
 
 ## Logistics
 
