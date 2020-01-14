@@ -13,7 +13,7 @@
 - Did you collaborate with any other students/TAs/Professors?
   No
 - Did you use any external resources? (Cite them below)
-No
+  No
 - (Optional) What was your favorite part of the lab?
 
 - (Optional) How would you improve the lab?
