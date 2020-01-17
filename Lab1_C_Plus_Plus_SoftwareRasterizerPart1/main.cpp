@@ -63,14 +63,24 @@ void drawLine(Vec2 v0, Vec2 v1, TGA& image, ColorRGB c){
 
 // Draw a triangle
 void triangle(Vec2 v0, Vec2 v1, Vec2 v2,TGA& image, ColorRGB c){
-    if(glFillMode==LINE){
-        drawLine(v0,v1,image,c);
-        drawLine(v1,v2,image,c);
-        drawLine(v2,v0,image,c);
-    }
-    // TODO: Draw a filled triangle
-}
+    // if(glFillMode==LINE){
+    ColorRGB green;
+    green.r = 0; 
+    green.g = 255;
+    green.b = 0;
 
+    drawLine(v0,v1,image,green);
+    drawLine(v1,v2,image,green);
+    drawLine(v2,v0,image,green);
+    // }
+
+    // TODO: Draw a filled triangle
+
+    // Draws a horizontal line near the bottom of the screen as an example.
+    for(int i = 0; i < 100; i++){
+        canvas.setPixelColor(i,300,c);
+    }
+}
 
 
 // Main
@@ -85,7 +95,7 @@ int main(){
     Vec2 line[2] = {Vec2(0,0), Vec2(100,100)};
 
     // Set the fill mode
-    glPolygonMode(FILL);
+    glPolygonMode(LINE);
 
     // Draw a line
     drawLine(line[0],line[1],canvas,red);
