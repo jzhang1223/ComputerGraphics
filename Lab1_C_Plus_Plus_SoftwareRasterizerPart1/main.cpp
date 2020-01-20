@@ -61,27 +61,50 @@ void drawLine(Vec2 v0, Vec2 v1, TGA& image, ColorRGB c){
     }
 }
 
-// Draw a triangle
-void triangle(Vec2 v0, Vec2 v1, Vec2 v2,TGA& image, ColorRGB c){
-    // if(glFillMode==LINE){
-    ColorRGB green;
-    green.r = 0; 
-    green.g = 255;
-    green.b = 0;
-
-    drawLine(v0,v1,image,green);
-    drawLine(v1,v2,image,green);
-    drawLine(v2,v0,image,green);
-    // }
-
-    // TODO: Draw a filled triangle
-
-    // Draws a horizontal line near the bottom of the screen as an example.
-    for(int i = 0; i < 100; i++){
-        canvas.setPixelColor(i,300,c);
-    }
+// Calculate the determinant of 2x2 vectors.
+int determinant(Vec2 u, Vec2 v) {
+    return u.x * v.y - u.y * v.x;
 }
 
+// Determine if the point v is in the triangle.
+bool inTriangle(Vec2 v0, Vec2 v1, Vec2 v) {
+
+    float a = (float)determinant(v, v1) / determinant(v0, v1);
+    float b = (float)determinant(v0, v) / determinant(v0, v1);
+
+    return a >= 0 && b >= 0 && a + b <= 1;
+}
+
+// Draw a triangle
+void triangle(Vec2 v0, Vec2 v1, Vec2 v2,TGA& image, ColorRGB c){
+    ColorRGB outline;
+    outline.r = 240; 
+    outline.g = 230;
+    outline.b = 140;
+
+    int maxX = std::max(v0.x, std::max(v1.x, v2.x));
+    int maxY = std::max(v0.y, std::max(v1.y, v2.y));
+    int minX = std::min(v0.x, std::min(v1.x, v2.x));
+    int minY = std::min(v0.y, std::min(v1.y, v2.y));
+
+    Vec2 vn0 = Vec2(v1.x - v0.x, v1.y - v0.y);
+    Vec2 vn1 = Vec2(v2.x - v0.x, v2.y - v0.y);
+
+    // Loop over the square min and max bounds of x and y
+    for(int i = minX; i <= maxX; i++) {
+        for(int j = minY; j <= maxY; j++) {
+            Vec2 vn = Vec2(i - v0.x, j - v0.y);
+            if (inTriangle(vn0, vn1, vn)) {
+                canvas.setPixelColor(i,j,c);
+            }
+        }
+    }
+
+    // Draw the outline of the triangle (for testing)
+    drawLine(v0,v1,image,outline);
+    drawLine(v1,v2,image,outline);
+    drawLine(v2,v0,image,outline);
+}
 
 // Main
 int main(){
