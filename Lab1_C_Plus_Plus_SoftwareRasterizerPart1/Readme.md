@@ -10,12 +10,12 @@
 
 ## Modify this section
 
-- How many hours did it take you to complete this lab?
-- Did you collaborate with any other students/TAs/Professors?
+- How many hours did it take you to complete this lab? 4
+- Did you collaborate with any other students/TAs/Professors? No
 - Did you use any external resources? (Cite them below)
   - http://mathworld.wolfram.com/TriangleInterior.html
-- (Optional) What was your favorite part of the lab?
-- (Optional) How would you improve the lab?
+- (Optional) What was your favorite part of the lab? Seeing the pixels being filled in.
+- (Optional) How would you improve the lab? N/A
 
 ## Logistics
 
