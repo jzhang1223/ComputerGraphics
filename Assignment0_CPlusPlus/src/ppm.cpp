@@ -1,4 +1,6 @@
 #include "PPM.h"
+#include <iostream>
+#include <fstream>
 
 // Constructor loads a filename with the .ppm extension
 PPM::PPM(std::string fileName){
@@ -13,6 +15,15 @@ PPM::~PPM(){
 // Saves a PPM Image to a new file.
 void PPM::savePPM(std::string outputFileName){
     // TODO: Save a PPM image to disk
+    std::ofstream outFile;
+    outFile.open(outputFileName);
+
+    // outFile << "data" << std::endl;
+
+
+
+    outFile.close();
+
 }
 
 // Darken subtracts 50 from each of the red, green
