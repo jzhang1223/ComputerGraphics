@@ -1,0 +1,87 @@
+{
+	"BUILD_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus",
+	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
+	"CMAKE_SOURCE_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus",
+	"HEADERS" : [],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/include",
+	"INCLUDE_DIR_Debug" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/include_Debug",
+	"INCLUDE_DIR_MinSizeRel" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/include_MinSizeRel",
+	"INCLUDE_DIR_RelWithDebInfo" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/include_RelWithDebInfo",
+	"INCLUDE_DIR_Release" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/include_Release",
+	"MOC_COMPILATION_FILE" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/Assignment0_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_OPENGL_LIB",
+		"QT_WIDGETS_LIB",
+		"WIN32"
+	],
+	"MOC_DEFINITIONS_Debug" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_OPENGL_LIB",
+		"QT_WIDGETS_LIB",
+		"WIN32"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build",
+		"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus",
+		"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/include",
+		"C:/Anaconda3/Library/include/qt",
+		"C:/Anaconda3/Library/include/qt/QtWidgets",
+		"C:/Anaconda3/Library/include/qt/QtGui",
+		"C:/Anaconda3/Library/include/qt/QtANGLE",
+		"C:/Anaconda3/Library/include/qt/QtCore",
+		"C:/Anaconda3/Library/mkspecs/win32-msvc",
+		"C:/Anaconda3/Library/include/qt/QtOpenGL"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : [],
+	"MOC_PREDEFS_FILE" : "",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : true,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE_Debug" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/ParseCache_Debug.txt",
+	"PARSE_CACHE_FILE_MinSizeRel" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/ParseCache_MinSizeRel.txt",
+	"PARSE_CACHE_FILE_RelWithDebInfo" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/ParseCache_RelWithDebInfo.txt",
+	"PARSE_CACHE_FILE_Release" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/ParseCache_Release.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Anaconda3/Library/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE_Debug" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/AutogenUsed_Debug.txt",
+	"SETTINGS_FILE_MinSizeRel" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/AutogenUsed_MinSizeRel.txt",
+	"SETTINGS_FILE_RelWithDebInfo" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/AutogenUsed_RelWithDebInfo.txt",
+	"SETTINGS_FILE_Release" : "C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/build/CMakeFiles/Assignment0_autogen.dir/AutogenUsed_Release.txt",
+	"SOURCES" : 
+	[
+		[
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/src/main.cpp",
+			"Mu"
+		],
+		[
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment0_CPlusPlus/src/ppm.cpp",
+			"Mu"
+		]
+	],
+	"VERBOSITY" : 0
+}
