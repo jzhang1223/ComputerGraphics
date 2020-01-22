@@ -1,11 +1,44 @@
 #include "PPM.h"
 #include <iostream>
 #include <fstream>
+#pragma once
+
+
 
 // Constructor loads a filename with the .ppm extension
 PPM::PPM(std::string fileName){
     // TODO:    Load and parse a ppm to get its pixel
     //          data stored properly.
+
+    std::ifstream inFile;
+
+    inFile.open(fileName);
+
+    unsigned char maxValue;
+    int pixelsFilled = 0;
+
+    if(inFile.is_open()) {
+        std::string line;
+        bool skipFirst = true;
+        while(getline(inFile,line)) {
+            // do something to the line
+            if (skipFirst || line[0] == '#') {
+                skipFirst = false;
+                continue;
+            }
+
+            if (!m_width) {
+                m_width = line[0];
+                m_height = line[2];
+                m_PixelData = new unsigned char[m_width * m_height * 3];
+            } else if (!maxValue) {
+                maxValue = line[0];
+            } else {
+                m_PixelData[pixelsFilled] = line[0];
+                pixelsFilled += 1;
+            }
+        }
+    }
 }
 
 // Destructor clears any memory that has been allocated
@@ -18,9 +51,20 @@ void PPM::savePPM(std::string outputFileName){
     std::ofstream outFile;
     outFile.open(outputFileName);
 
-    // outFile << "data" << std::endl;
+    outFile << "P3" << std::endl;
+    outFile << "# Comment" << std::endl;
+    outFile << m_width << " " << m_height << std::endl;
+    // TODO replace this 
+    outFile << "MAX VALUE" << std::endl;
 
+    // for(int i = 0; this->m_PixelData[i] != '\0'; i++) {
 
+    // for(int i = 0; i < sizeof(m_PixelData) / sizeof(m_PixelData[0]); i++) {
+    
+    // for(int i = 0; i < 6; i++) {
+    //     std::cout << i;
+    //     outFile << this->m_PixelData[i] << "\n";
+    // }
 
     outFile.close();
 
