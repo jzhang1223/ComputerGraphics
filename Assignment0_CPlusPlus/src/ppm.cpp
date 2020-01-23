@@ -14,7 +14,7 @@ PPM::PPM(std::string fileName){
 
     inFile.open(fileName);
 
-    // unsigned char maxValue;
+    int maxValue = -1;
     int pixelsFilled = 0;
 
     std::cout << "Loading PPM Named: " << fileName << "\n";
@@ -23,45 +23,57 @@ PPM::PPM(std::string fileName){
         std::string line;
         bool skipFirst = true;
         while(getline(inFile,line)) {
-            // do something to the line
             if (skipFirst || line[0] == '#') {
                 std::cout << "SKIPPING: " << line << "\n";
                 skipFirst = false;
                 continue;
             }
 
-            std::cout << line << "\n";
-
             if (!m_width) {
                 std::cout << "STORING m_width AS: " << line[0] << "\n";
-                // if (line[0] == "1") {
-                //     std::cout << "STRING-STRING-STRING\n";
-                // }
-                // if (line[0] == '1') {
-                //     std::cout << "CHAR-CHAR-CHAR\n";
-                // }
                 m_width = line[0] - '0';
                 std::cout << "STORING m_height AS: " << line[2] << "\n";
                 m_height = line[2] - '0';
+                
+                m_PixelData = new unsigned char[m_width * m_height * 3];
+            } else if (maxValue == -1) {
+                maxValue = std::stoi(line);
+                std::cout << "maxValue: " << maxValue << "\n";
+
+            } else {
+                std::cout << "Filling Pixel #" << pixelsFilled << " : " << line << " ... ";
+                m_PixelData[pixelsFilled] = std::stoi(line);
+                // std::cout << m_PixelData[pixelsFilled] << "\n";
+                printf("%i", m_PixelData[pixelsFilled]);
+
+                // printf("%i: %i\n", i, pixelData[i]);
+
+                pixelsFilled += 1;
+                std::cout << "\n";
             }
-            //     m_PixelData = new unsigned char[m_width * m_height * 3];
-            // } else if (!maxValue) {
-            //     maxValue = line[0];
-            // } else {
-            //     m_PixelData[pixelsFilled] = line[0];
-            //     pixelsFilled += 1;
-            // }
         }
     }
 
     std::cout << "Finished Loading PPM\n";
 
     inFile.close();
+    int max = m_width * m_height * 3;
+    // for (int i = 0; this->m_PixelData[i] != '\0'; i++) {
+    for (int i = 0; i < max; i++) {
+        printf("%i", m_PixelData[i]);
+        std::cout << " = " << m_PixelData[i] << "\n";
+
+
+    }
+
+    std::cout << "pixelsFilled: " << pixelsFilled << "\n\n";
+
 
 }
 
 // Destructor clears any memory that has been allocated
 PPM::~PPM(){
+    delete m_PixelData;
 }
 
 // Saves a PPM Image to a new file.
@@ -80,16 +92,17 @@ void PPM::savePPM(std::string outputFileName){
     // TODO replace this 
     outFile << "MAX VALUE\n";
 
-    // for(int i = 0; this->m_PixelData[i] != '\0'; i++) {
 
-    // for(int i = 0; i < sizeof(m_PixelData) / sizeof(m_PixelData[0]); i++) {
+    // print out pixel data
+    int max = m_width * m_height * 3;
+    std::cout << "\n";
+    for(int i = 0; i < max; i++) {
+        // std::cout << i << " ";
+        printf("%i\n", m_PixelData[i]);
+        outFile << int(this->m_PixelData[i]) << "\n";
+    }
 
-    // for(int i = 0; i < 6; i++) {
-    //     std::cout << i;
-    //     outFile << this->m_PixelData[i] << "\n";
-    // }
-
-    std::cout << "Finished Saving PPM\n";
+    std::cout << "\nFinished Saving PPM\n";
 
     outFile.close();
 
@@ -100,10 +113,24 @@ void PPM::savePPM(std::string outputFileName){
 // in the PPM. Note that no values may be less than
 // 0 in a ppm.
 void PPM::darken(){
-    // TODO: Output a 'filtered' PPM image.
+    int max = m_width * m_height * 3;
+    for (int i = 0; i < max; i++) {
+        if (m_PixelData[i] + 50 <= 100) {
+            m_PixelData[i] = 0;
+        }
+        else {
+            m_PixelData[i] -= 50;
+        }
+    }
 }
 
 // Sets a pixel to a specific R,G,B value 
 void PPM::setPixel(int x, int y, int R, int G, int B){
-    // TODO: Implement
+    int red_index = (m_width * y * 3) + (3 * x);
+    int green_index = red_index + 1;
+    int blue_index = red_index + 2;
+
+    m_PixelData[red_index] = R;
+    m_PixelData[green_index] = G;
+    m_PixelData[blue_index] = B;
 }
