@@ -28,13 +28,14 @@ PPM::PPM(std::string fileName){
                 skipFirst = false;
                 continue;
             }
+            // TODO do some word parsing here
 
             if (!m_width) {
                 std::cout << "STORING m_width AS: " << line[0] << "\n";
                 m_width = line[0] - '0';
                 std::cout << "STORING m_height AS: " << line[2] << "\n";
                 m_height = line[2] - '0';
-                
+
                 m_PixelData = new unsigned char[m_width * m_height * 3];
             } else if (maxValue == -1) {
                 maxValue = std::stoi(line);
@@ -44,6 +45,8 @@ PPM::PPM(std::string fileName){
                 std::cout << "Filling Pixel #" << pixelsFilled << " : " << line << " ... ";
                 m_PixelData[pixelsFilled] = std::stoi(line);
                 // std::cout << m_PixelData[pixelsFilled] << "\n";
+
+                // TODO scale the pixel if necessary
                 printf("%i", m_PixelData[pixelsFilled]);
 
                 // printf("%i: %i\n", i, pixelData[i]);
@@ -85,19 +88,16 @@ void PPM::savePPM(std::string outputFileName){
     std::cout << "Saving PPM named: " << outputFileName << "\n";
 
     outFile << "P3\n";
-    outFile << "# Comment\n";
+    outFile << "# CS4300 ASGN0\n";
 
     std::cout << "WRITING: " << m_width << " " << m_height << "\n";
     outFile << m_width << " " << m_height << "\n";
     // TODO replace this 
-    outFile << "MAX VALUE\n";
+    outFile << "255\n";
 
-
-    // print out pixel data
     int max = m_width * m_height * 3;
     std::cout << "\n";
     for(int i = 0; i < max; i++) {
-        // std::cout << i << " ";
         printf("%i\n", m_PixelData[i]);
         outFile << int(this->m_PixelData[i]) << "\n";
     }
