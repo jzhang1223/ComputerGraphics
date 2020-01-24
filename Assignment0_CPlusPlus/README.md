@@ -1,15 +1,22 @@
 # Assignment 1 - Modern C++ PPM Library
 
-*TODO*: Please edit the following information in your assignment
+Please edit the following information in your assignment
 
-* Name and partners name (At most 1 partner for this assignment): 
+* Name and partners name (At most 1 partner for this assignment):
+Justin Zhang, Abhishek Irudayaraj 
 * How many hours did it take you to complete this assignment? 
-* Did you collaborate or share ideas with any other students/TAs/Professors? 
+7
+* Did you collaborate or share ideas with any other students/TAs/Professors?
+- went to TA office hours
 * Did you use any external resources? 
-  * (tbd if any)
-  * (tbd if any)
-  * (tbd if any)
-* (Optional) What was the most interesting part of the assignment? How would you improve this assignment?
+  * https://code.sololearn.com/cxbsvjtABY48/#cpp
+  * http://www.cplusplus.com/
+* (Optional) What was the most interesting part of the assignment?
+  The ppms given were interesting and it was cool to see the darkened output.
+How would you improve this assignment?
+  Overall, pretty good. It would have been nice to have some examples of different types of streams that could be used for reading files.
+
+###Note: the input file is hard-coded into main.cpp
   
 ## Description
 
