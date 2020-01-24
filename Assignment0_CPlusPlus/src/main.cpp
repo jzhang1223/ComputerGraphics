@@ -7,6 +7,10 @@ int main(){
     myPPM.darken();
     myPPM.savePPM("../textures/test1_darken.ppm");
 
+    // PPM myPPM("../textures/test.ppm");
+    // myPPM.darken();
+    // myPPM.savePPM("../textures/test_darken.ppm");
+
     // PPM myPPM("../textures/sample.ppm");
     // myPPM.darken();
     // myPPM.setPixel(0, 1, 12, 34, 56);
