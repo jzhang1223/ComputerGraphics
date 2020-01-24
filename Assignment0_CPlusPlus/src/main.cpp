@@ -9,7 +9,7 @@ int main(){
 
     // PPM myPPM("../textures/sample.ppm");
     // myPPM.darken();
-    // myPPM.setPixel(0, 1, 12, 34, 57);
+    // myPPM.setPixel(0, 1, 12, 34, 56);
     // myPPM.savePPM("../textures/sample_saved.ppm");
 
     return 0;

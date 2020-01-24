@@ -16,6 +16,8 @@ PPM::PPM(std::string fileName){
 
     int maxValue = -1;
     int pixelsFilled = 0;
+    float scale = 1.0f;
+    int lineNumber = 0;
 
     std::cout << "Loading PPM Named: " << fileName << "\n";
 
@@ -23,6 +25,8 @@ PPM::PPM(std::string fileName){
         std::string line;
         bool skipFirst = true;
         while(getline(inFile,line)) {
+            std::cout << lineNumber;
+            lineNumber++;
             if (skipFirst || line[0] == '#') {
                 std::cout << "SKIPPING: " << line << "\n";
                 skipFirst = false;
@@ -39,18 +43,15 @@ PPM::PPM(std::string fileName){
                 m_PixelData = new unsigned char[m_width * m_height * 3];
             } else if (maxValue == -1) {
                 maxValue = std::stoi(line);
+                scale = 255.0f / maxValue;
                 std::cout << "maxValue: " << maxValue << "\n";
+                printf("%i\n", scale);
 
             } else {
                 std::cout << "Filling Pixel #" << pixelsFilled << " : " << line << " ... ";
-                m_PixelData[pixelsFilled] = std::stoi(line);
-                // std::cout << m_PixelData[pixelsFilled] << "\n";
 
-                // TODO scale the pixel if necessary
+                m_PixelData[pixelsFilled] = std::stoi(line) * scale;
                 printf("%i", m_PixelData[pixelsFilled]);
-
-                // printf("%i: %i\n", i, pixelData[i]);
-
                 pixelsFilled += 1;
                 std::cout << "\n";
             }
@@ -92,7 +93,6 @@ void PPM::savePPM(std::string outputFileName){
 
     std::cout << "WRITING: " << m_width << " " << m_height << "\n";
     outFile << m_width << " " << m_height << "\n";
-    // TODO replace this 
     outFile << "255\n";
 
     int max = m_width * m_height * 3;
@@ -115,10 +115,9 @@ void PPM::savePPM(std::string outputFileName){
 void PPM::darken(){
     int max = m_width * m_height * 3;
     for (int i = 0; i < max; i++) {
-        if (m_PixelData[i] + 50 <= 100) {
+        if (m_PixelData[i] < 51) {
             m_PixelData[i] = 0;
-        }
-        else {
+        } else {
             m_PixelData[i] -= 50;
         }
     }
@@ -126,7 +125,8 @@ void PPM::darken(){
 
 // Sets a pixel to a specific R,G,B value 
 void PPM::setPixel(int x, int y, int R, int G, int B){
-    int red_index = (m_width * y * 3) + (3 * x);
+    // int red_index = (m_width * y * 3) + (3 * x);
+    int red_index = 3 * (m_width * y + x);
     int green_index = red_index + 1;
     int blue_index = red_index + 2;
 
