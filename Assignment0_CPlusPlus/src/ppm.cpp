@@ -1,6 +1,7 @@
 #include "PPM.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #pragma once
 
 
@@ -17,7 +18,7 @@ PPM::PPM(std::string fileName){
     int maxValue = -1;
     int pixelsFilled = 0;
     float scale = 1.0f;
-    int lineNumber = 0;
+    int lineNumber = 1;
 
     std::cout << "Loading PPM Named: " << fileName << "\n";
 
@@ -25,7 +26,7 @@ PPM::PPM(std::string fileName){
         std::string line;
         bool skipFirst = true;
         while(getline(inFile,line)) {
-            std::cout << lineNumber;
+            // std::cout << "Line Number: " << lineNumber << " : ";
             lineNumber++;
             if (skipFirst || line[0] == '#') {
                 std::cout << "SKIPPING: " << line << "\n";
@@ -35,10 +36,12 @@ PPM::PPM(std::string fileName){
             // TODO do some word parsing here
 
             if (!m_width) {
-                std::cout << "STORING m_width AS: " << line[0] << "\n";
-                m_width = line[0] - '0';
-                std::cout << "STORING m_height AS: " << line[2] << "\n";
-                m_height = line[2] - '0';
+                std::istringstream iss(line);
+                iss >> m_width >> m_height;
+                std::cout << "STORING m_width " << "\n";
+                // m_width = std::stoi(line.substr(0, line.find(" ")));
+                std::cout << "STORING m_height" << "\n";
+                // m_height = std::stoi(line.substr(line.find(" ")));
 
                 m_PixelData = new unsigned char[m_width * m_height * 3];
             } else if (maxValue == -1) {
@@ -48,12 +51,14 @@ PPM::PPM(std::string fileName){
                 printf("%i\n", scale);
 
             } else {
-                std::cout << "Filling Pixel #" << pixelsFilled << " : " << line << " ... ";
+                // std::cout << "Filling Pixel #" << pixelsFilled << " : " << line << " ... ";
 
                 m_PixelData[pixelsFilled] = std::stoi(line) * scale;
-                printf("%i", m_PixelData[pixelsFilled]);
+                // printf("%i", m_PixelData[pixelsFilled]);
+                // std::cout << "\n";
+                // printf("width:%i, height:%i", m_width, m_height);
                 pixelsFilled += 1;
-                std::cout << "\n";
+                // std::cout << "\n";
             }
         }
     }
@@ -63,12 +68,12 @@ PPM::PPM(std::string fileName){
     inFile.close();
     int max = m_width * m_height * 3;
     // for (int i = 0; this->m_PixelData[i] != '\0'; i++) {
-    for (int i = 0; i < max; i++) {
-        printf("%i", m_PixelData[i]);
-        std::cout << " = " << m_PixelData[i] << "\n";
+    // for (int i = 0; i < max; i++) {
+    //     printf("%i", m_PixelData[i]);
+    //     std::cout << " = " << m_PixelData[i] << "\n";
 
 
-    }
+    // }
 
     std::cout << "pixelsFilled: " << pixelsFilled << "\n\n";
 
@@ -82,7 +87,6 @@ PPM::~PPM(){
 
 // Saves a PPM Image to a new file.
 void PPM::savePPM(std::string outputFileName){
-    // TODO: Save a PPM image to disk
     std::ofstream outFile;
     outFile.open(outputFileName);
 
@@ -98,7 +102,7 @@ void PPM::savePPM(std::string outputFileName){
     int max = m_width * m_height * 3;
     std::cout << "\n";
     for(int i = 0; i < max; i++) {
-        printf("%i\n", m_PixelData[i]);
+        // printf("%i\n", m_PixelData[i]);
         outFile << int(this->m_PixelData[i]) << "\n";
     }
 
