@@ -16,7 +16,7 @@ Justin Zhang, Abhishek Irudayaraj
 How would you improve this assignment?
   Overall, pretty good. It would have been nice to have some examples of different types of streams that could be used for reading files.
 
-###Note: the input file is hard-coded into main.cpp
+**Note**: the input file is hard-coded into main.cpp
   
 ## Description
 
