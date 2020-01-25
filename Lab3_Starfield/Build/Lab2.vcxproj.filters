@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\Build\Lab2_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\BasicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\Lab2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\StarList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab3_Starfield\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CE0B24A1-3AA2-3575-914E-0DB80FD6347F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
