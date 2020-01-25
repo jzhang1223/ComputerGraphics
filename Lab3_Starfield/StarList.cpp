@@ -33,7 +33,7 @@ void StarList::updateAndRender(QImage& image, float delta, const QSize& windowSi
     float halfWidth = 800 / 2.0f;
     float halfHeight = 600 / 2.0f;
 
-    // tan(70/2) ~ .7002
+    // tan(70 degrees/2) ~ .7002
     float tanHalfFOV = .7002;
 
     // Iterate through all of your stars 
