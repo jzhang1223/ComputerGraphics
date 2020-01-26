@@ -19,6 +19,10 @@ struct Vector4f{
     // This initializes the values x,y,z
     Vector4f(float a, float b, float c, float d){
       // TODO:
+      this->x = a;
+      this->y = b;
+      this->z = c;
+      this->w = d;
     }
 
     // Index operator, allowing us to access the individual
@@ -41,6 +45,8 @@ struct Vector4f{
     // Multiply vector by a uniform-scalar.
     Vector4f& operator *=(float s){
         // TODO:
+
+      
         return (*this);
     }
 
