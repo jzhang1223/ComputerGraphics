@@ -81,49 +81,42 @@ struct Vector4f{
 
 // Compute the dot product of a Vector4f
 inline float Dot(const Vector4f& a, const Vector4f& b){
-  // TODO:
-  return 0;
-}
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  }
 
 // Multiplication of a vector by a scalar values
 inline Vector4f operator *(const Vector4f& v, float s){
-  // TODO:
-  Vector4f vec;
+  Vector4f vec = Vector4f(v[0] * s, v[1] * s, -v[2] * s, -v[3] * s);
   return vec;
 }
 
 // Division of a vector by a scalar value.
 inline Vector4f operator /(const Vector4f& v, float s){
-  // TODO:
-  Vector4f vec;
+  Vector4f vec = Vector4f(v[0] / s, v[1] / s, v[2] / s, v[3] / s);
   return vec;
 }
 
 // Negation of a vector
 // Use Case: Sometimes it is handy to apply a force in an opposite direction
 inline Vector4f operator -(const Vector4f& v){
-  // TODO:
-  Vector4f vec;
+  Vector4f vec = Vector4f(-v[0], -v[1], -v[2], -v[3]);
   return vec;
 }
 
 // Return the magnitude of a vector
 inline float Magnitude(const Vector4f& v){
-  // TODO:
-  return 0;
+  return sqrt(pow(v[0], 2), pow(v[1], 2), pow(v[2], 2), pow(v[3], 2));
 }
 
 // Add two vectors together
 inline Vector4f operator +(const Vector4f& a, const Vector4f& b){
-  // TODO:
-  Vector4f vec;
+  Vector4f vec = Vector4f(v[0] + s, v[1] + s, v[2] + s, v[3] + s);
   return vec;
 }
 
 // Subtract two vectors
 inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
-  // TODO:
-  Vector4f vec;
+  Vector4f vec = Vector4f(v[0] - s, v[1] - s, v[2] - s, v[3] - s);
   return vec;
 }
 
