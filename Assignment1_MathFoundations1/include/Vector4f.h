@@ -18,7 +18,6 @@ struct Vector4f{
     // The "Real" constructor we want to use.
     // This initializes the values x,y,z
     Vector4f(float a, float b, float c, float d){
-      // TODO:
       this->x = a;
       this->y = b;
       this->z = c;
@@ -44,31 +43,38 @@ struct Vector4f{
     // Multiplication Operator
     // Multiply vector by a uniform-scalar.
     Vector4f& operator *=(float s){
-        // TODO:
-
-      
+        this->x *= s;
+        this->y *= s;
+        this->z *= s;
+        this->w *= s;
         return (*this);
     }
 
     // Division Operator
     Vector4f& operator /=(float s){
-        // TODO:
-
+        this->x /= s;
+        this->y /= s;
+        this->z /= s;
+        this->w /= s;
         return (*this);
     }
 
     // Addition operator
     Vector4f& operator +=(const Vector4f& v){
-        // TODO:
-
-      return (*this);
+        this->x += v[0];
+        this->y += v[1];
+        this->z += v[2];
+        this->w += v[3];
+        return (*this);
     }
 
     // Subtraction operator
     Vector4f& operator -=(const Vector4f& v){
-        // TODO:
-
-      return (*this);
+        this->x -= v[0];
+        this->y -= v[1];
+        this->z -= v[2];
+        this->w -= v[3];
+        return (*this);
     }
 
 };
