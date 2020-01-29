@@ -22,7 +22,9 @@ void BasicWidget::paintEvent(QPaintEvent* event)
   Q_UNUSED(event);
 
   qint64 curTicks = QDateTime::currentMSecsSinceEpoch();
-  float delta = (float)((curTicks - prevTicks_) / 1000.0);
+  // float delta = (float)((curTicks - prevTicks_) / 1000.0);
+  float delta = (float)((curTicks - prevTicks_) / 10.0);
+
 
   yAxisRotation_ += delta;
 
@@ -30,8 +32,9 @@ void BasicWidget::paintEvent(QPaintEvent* event)
   translation_.InitTranslation(0.0, 0.0, 3.0);
   rotation_.InitRotation(0.0, yAxisRotation_, 0.0);
 
+
   // TODO:  Make sure our transform is correct! (Apply our transforms)
-  transform_ = transform_;
+  transform_ = projection_.Multiply(translation_.Multiply(rotation_));
 
   buffer_.clearImage();
   Vertex v0 = maxYVert_.Transform(transform_);
