@@ -36,9 +36,9 @@ public:
     void InitTranslation(float x,float y,float z) {
         // TODO:
         // Implement  correct translation matrix
-        m[0][0] = 0;    m[0][1] = 0; m[0][2] = 0; m[0][3] = 0;
-        m[1][0] = 0;    m[1][1] = 0; m[1][2] = 0; m[1][3] = 0;
-        m[2][0] = 0;    m[2][1] = 0; m[2][2] = 0; m[2][3] = 0;
+        m[0][0] = 1;    m[0][1] = 0; m[0][2] = 0; m[0][3] = x;
+        m[1][0] = 0;    m[1][1] = 1; m[1][2] = 0; m[1][3] = y;
+        m[2][0] = 0;    m[2][1] = 0; m[2][2] = 1; m[2][3] = z;
         m[3][0] = 0;    m[3][1] = 0; m[3][2] = 0; m[3][3] = 0;
     }
 
@@ -48,21 +48,25 @@ public:
         Matrix4f rx;
         Matrix4f ry;
         Matrix4f rz;
+
+        float xRad = qDegreesToRadians(x);
+        float yRad = qDegreesToRadians(y);
+        float zRad = qDegreesToRadians(z);
         
         // TODO:
-        rz.Set(0,0, 0);         rz.Set(0,1,0);      rz.Set(0,2,0);  rz.Set(0,3,0); 
-        rz.Set(1,0, 0);         rz.Set(1,1,0);      rz.Set(1,2,0);  rz.Set(1,3,0);
+        rz.Set(0,0, qCos(zRad));         rz.Set(0,1, -qSin(zRad));      rz.Set(0,2,0);  rz.Set(0,3,0); 
+        rz.Set(1,0, qSin(zRad));         rz.Set(1,1, qCos(zRad));      rz.Set(1,2,0);  rz.Set(1,3,0);
         rz.Set(2,0, 0);         rz.Set(2,1,0);      rz.Set(2,2,1);  rz.Set(2,3,0);
         rz.Set(3,0, 0);         rz.Set(3,1,0);      rz.Set(3,2,0);  rz.Set(3,3,1);
     
         rx.Set(0,0, 1);         rx.Set(0,1,0);      rx.Set(0,2,0);  rx.Set(0,3,0); 
-        rx.Set(1,0, 0);         rx.Set(1,1,0);      rx.Set(1,2,0);  rx.Set(1,3,0);
-        rx.Set(2,0, 0);         rx.Set(2,1,0);      rx.Set(2,2,0);  rx.Set(2,3,0);
+        rx.Set(1,0, 0);         rx.Set(1,1, qCos(xRad));      rx.Set(1,2, -qSin(xRad));  rx.Set(1,3,0);
+        rx.Set(2,0, 0);         rx.Set(2,1, qSin(xRad));      rx.Set(2,2, qCos(xRad));  rx.Set(2,3,0);
         rx.Set(3,0, 0);         rx.Set(3,1,0);      rx.Set(3,2,0);  rx.Set(3,3,1);
 
-        ry.Set(0,0, 0);         ry.Set(0,1,0);      ry.Set(0,2,0);  ry.Set(0,3,0); 
+        ry.Set(0,0, qCos(yRad));         ry.Set(0,1,0);      ry.Set(0,2, qSin(yRad));  ry.Set(0,3,0); 
         ry.Set(1,0, 0);         ry.Set(1,1,1);      ry.Set(1,2,0);  ry.Set(1,3,0);
-        ry.Set(2,0, 0);         ry.Set(2,1,0);      ry.Set(2,2,0);  ry.Set(2,3,0);
+        ry.Set(2,0, -qSin(yRad));         ry.Set(2,1,0);      ry.Set(2,2, qCos(yRad));  ry.Set(2,3,0);
         ry.Set(3,0, 0);         ry.Set(3,1,0);      ry.Set(3,2,0);  ry.Set(3,3,1);
   
         // Multiply the matrices
