@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab4_MatrixTransformations\Build\Lab_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab4_MatrixTransformations\BasicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab4_MatrixTransformations\Lab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab4_MatrixTransformations\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab4_MatrixTransformations\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{60CA44E7-7AE5-31D8-AF28-E0072BADE26D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
