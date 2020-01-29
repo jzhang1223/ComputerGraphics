@@ -45,8 +45,7 @@ void StarList::updateAndRender(QImage& image, float delta, const QSize& windowSi
             continue;
         }
 
-        // TODO: Modify me!!
-        float givePerspective = stars_[i].z / tanHalfFOV;
+        float givePerspective = stars_[i].z * tanHalfFOV;
 
         // Apply our perspective
         int x = (int)((stars_[i].x / (givePerspective)) * halfWidth + halfWidth);
