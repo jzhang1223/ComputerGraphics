@@ -110,13 +110,13 @@ inline float Magnitude(const Vector4f& v){
 
 // Add two vectors together
 inline Vector4f operator +(const Vector4f& a, const Vector4f& b){
-  Vector4f vec = Vector4f(v[0] + s, v[1] + s, v[2] + s, v[3] + s);
+  Vector4f vec = Vector4f(a[0] + b[0], a[1] + b[1], a[2] + b[2], a[3] + b[3]);
   return vec;
 }
 
 // Subtract two vectors
 inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
-  Vector4f vec = Vector4f(v[0] - s, v[1] - s, v[2] - s, v[3] - s);
+  Vector4f vec = Vector4f(a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3]);
   return vec;
 }
 
