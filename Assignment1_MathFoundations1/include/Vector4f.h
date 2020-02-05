@@ -105,7 +105,7 @@ inline Vector4f operator -(const Vector4f& v){
 
 // Return the magnitude of a vector
 inline float Magnitude(const Vector4f& v){
-  return sqrt(pow(v[0], 2), pow(v[1], 2), pow(v[2], 2), pow(v[3], 2));
+  return sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2) + pow(v[3], 2));
 }
 
 // Add two vectors together
@@ -124,7 +124,7 @@ inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
 // Note: This is the vector projection of 'a' onto 'b'
 inline Vector4f Project(const Vector4f& a, const Vector4f& b){
   // TODO:
-  Vector4f vec = (Dot(a, b) / Magnitude(a)) * Normalize(v);
+  Vector4f vec = (Dot(a, b) / Magnitude(a)) * Normalize(b);
   return vec;
 }
 
