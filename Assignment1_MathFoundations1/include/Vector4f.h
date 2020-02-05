@@ -124,7 +124,7 @@ inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
 // Note: This is the vector projection of 'a' onto 'b'
 inline Vector4f Project(const Vector4f& a, const Vector4f& b){
   // TODO:
-  Vector4f vec = (Dot(a, b) / Magnitude(a)) * Normalize(b);
+  Vector4f vec = Normalize(b) * (Dot(a, b) / Magnitude(a)) ;
   return vec;
 }
 
