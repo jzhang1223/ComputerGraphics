@@ -120,14 +120,6 @@ inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
   return vec;
 }
 
-// Vector Projection
-// Note: This is the vector projection of 'a' onto 'b'
-inline Vector4f Project(const Vector4f& a, const Vector4f& b){
-  // TODO:
-  Vector4f vec = Normalize(b) * (Dot(a, b) / Magnitude(a)) ;
-  return vec;
-}
-
 // Set a vectors magnitude to 1
 // Note: This is NOT generating a normal vector
 inline Vector4f Normalize(const Vector4f& v){
@@ -136,6 +128,15 @@ inline Vector4f Normalize(const Vector4f& v){
   vec = v / Magnitude(v);
   return vec;
 }
+
+// Vector Projection
+// Note: This is the vector projection of 'a' onto 'b'
+inline Vector4f Project(const Vector4f& a, const Vector4f& b){
+  // TODO:
+  Vector4f vec = Normalize(b) * (Dot(a, b) / Magnitude(a)) ;
+  return vec;
+}
+
 
 // a x b (read: 'a crossed b')
 // Produces a new vector perpendicular to a and b.
