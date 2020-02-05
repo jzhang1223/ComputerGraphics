@@ -124,7 +124,7 @@ inline Vector4f operator -(const Vector4f& a, const Vector4f& b){
 // Note: This is the vector projection of 'a' onto 'b'
 inline Vector4f Project(const Vector4f& a, const Vector4f& b){
   // TODO:
-  Vector4f vec;
+  Vector4f vec = (Dot(a, b) / Magnitude(a)) * Normalize(v);
   return vec;
 }
 
@@ -133,6 +133,7 @@ inline Vector4f Project(const Vector4f& a, const Vector4f& b){
 inline Vector4f Normalize(const Vector4f& v){
   // TODO:
   Vector4f vec;
+  vec = v / Magnitude(v);
   return vec;
 }
 
@@ -145,6 +146,10 @@ inline Vector4f Normalize(const Vector4f& v){
 inline Vector4f CrossProduct(const Vector4f& a, const Vector4f& b){
   // TODO:
   Vector4f vec;
+  vec[0] = a[1]*b[2];
+  vec[1] = a[2]*b[0]-a[0]*b[2];
+  vec[2] = a[0]*b[1]-b[1]*a[0];
+  vec[3] = 1;
   return vec;
 }
 
