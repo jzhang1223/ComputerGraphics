@@ -499,10 +499,10 @@ bool test_m_multiply_glm(){
                 18,9,2,10);
     Matrix4f m3 = m1 * m2;
 
-    glm::vec4 gv1(5.0f, 7.0f, 9.0f, 10.0f);
-    glm::vec4 gv2(2.0f, 3.0f, 3.0f, 8.0f);
-    glm::vec4 gv3(8.0f, 10.0f, 2.0f, 3.0f);
-    glm::vec4 gv4(3.0f, 3.0f, 4.0f, 8.0f);
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
 
     // glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
     // glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
@@ -511,10 +511,10 @@ bool test_m_multiply_glm(){
 
     glm::mat4 gm1 = glm::mat4(gv1, gv2, gv3, gv4);
 
-    glm::vec4 gv11(3.0f, 10.0f, 12.0f, 18.0f);
-    glm::vec4 gv22(12.0f, 1.0f, 4.0f, 9.0f);
-    glm::vec4 gv33(9.0f, 10.0f, 12.0f, 2.0f);
-    glm::vec4 gv44(3.0f, 12.0f, 4.0f, 10.0f);
+    glm::vec4 gv11(3.0f, 12.0f, 9.0f, 3.0f);
+    glm::vec4 gv22(10.0f, 1.0f, 10.0f, 12.0f);
+    glm::vec4 gv33(12.0f, 4.0f, 12.0f, 4.0f);
+    glm::vec4 gv44(18.0f, 9.0f, 2.0f, 10.0f);
 
     // glm::vec4 gv11(3.0f, 12.0f, 9.0f, 3.0f);
     // glm::vec4 gv22(10.0f, 1.0f, 10.0f, 12.0f);
@@ -522,6 +522,15 @@ bool test_m_multiply_glm(){
     // glm::vec4 gv44(18.0f, 9.0f, 2.0f, 10.0f);
 
     glm::mat4 gm2 = glm::mat4(gv11, gv22, gv33, gv44);
+
+    // for(int i = 0; i < 4; ++i) {
+    //     for(int j = 0; j < 4; ++j){
+    //         std::cout << "(" << i << "," << j << ")=" << gm[i][j] << " ";
+    //     }
+    //     std::cout << "\n";
+
+    // }
+    // std::cout << "\n";
 
     glm::mat4 gm3 = gm1 * gm2;
 
@@ -576,6 +585,15 @@ bool test_m_multiply_vector_glm() {
                 10,8,3,8);
     Vector4f v1(3,8,6,2);
 
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j){
+            std::cout << "(" << i << "," << j << ")=" << m1[i][j] << " ";
+        }
+        std::cout << "\n";
+
+    }
+    std::cout << "\n";
+
     Vector4f result = m1 * v1;
 
     glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
@@ -584,17 +602,22 @@ bool test_m_multiply_vector_glm() {
     glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
     glm::mat4 gm1 = glm::mat4(gv1, gv2, gv3, gv4);
 
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j){
+            std::cout << "(" << i << "," << j << ")=" << gm1[i][j] << " ";
+        }
+        std::cout << "\n";
+
+    }
+    std::cout << "\n";
+
+
+
     glm::vec4 gv11(3,8,6,2);
 
     glm::vec4 answer = gm1 * gv11;
 
-    for(int i = 0; i < 4; ++i) {
-        for(int j = 0; j < 4; ++j){
-            std::cout << gm1[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
-    std::cout << "\n";
+
 
     // for(int i = 0; i < 4; ++i) {
     //     std::cout << gv11[i] << " ";
@@ -607,13 +630,7 @@ bool test_m_multiply_vector_glm() {
     // }
     // std::cout << "\n------\n";
 
-    for(int i = 0; i < 4; ++i) {
-        for(int j = 0; j < 4; ++j){
-            std::cout << m1[i][j] << " ";
-        }
-        std::cout << "\n";
 
-    }
     // std::cout << "\n";
 
     // for(int i = 0; i < 4; ++i) {
