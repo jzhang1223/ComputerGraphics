@@ -73,36 +73,71 @@ public:
     Matrix4f MakeRotationX(float t){
         // TODO:
         // May need radians conversion
-        // Matrix4f m4 = this;
-        Matrix4f xRotate(1, 0, 0, 0,
-                                 0, cos(t), sin(t), 0,
-                                 0, -sin(t), cos(t), 0,
-                                 0, 0, 0, 1);
-        // return &(m4 * xRotate);
+
+        Matrix4f xRotate(
+        1, 0, 0, 0,
+        0, cos(t), sin(t), 0,
+        0, -sin(t), cos(t), 0,
+        0, 0, 0, 1);
+
+        Vector4f Col0 = Vector4f((0, 0), (1, 0), (2, 0), (3, 0));
+        Vector4f Col1 = Vector4f((0, 1), (1, 1), (2, 1), (3, 1));
+        Vector4f Col2 = Vector4f((0, 2), (1, 2), (2, 2), (3, 2));
+        Vector4f Col3 = Vector4f((0, 3), (1, 3), (2, 3), (3, 3));
+
+        Matrix4f result;
+
+        result[0][0] = Dot(xRotate.operator[](0), Col0);
+        result[1][0] = Dot(xRotate.operator[](1), Col0);
+        result[2][0] = Dot(xRotate.operator[](2), Col0);
+        result[3][0] = Dot(xRotate.operator[](3), Col0);
+
+        result[0][1] = Dot(xRotate.operator[](0), Col1);
+        result[1][1] = Dot(xRotate.operator[](1), Col1);
+        result[2][1] = Dot(xRotate.operator[](2), Col1);
+        result[3][1] = Dot(xRotate.operator[](3), Col1);
+
+        result[0][2] = Dot(xRotate.operator[](0), Col2);
+        result[1][2] = Dot(xRotate.operator[](1), Col2);
+        result[2][2] = Dot(xRotate.operator[](2), Col2);
+        result[3][2] = Dot(xRotate.operator[](3), Col2);
+
+        result[0][3] = Dot(xRotate.operator[](0), Col3);
+        result[1][3] = Dot(xRotate.operator[](1), Col3);
+        result[2][3] = Dot(xRotate.operator[](2), Col3);
+        result[3][3] = Dot(xRotate.operator[](3), Col3);
 
 
-                // You will need to modify this.
-                // When you test, test against glm_gtx_transform
+        return result;
+
+        // You will need to modify this.
+        // When you test, test against glm_gtx_transform
     }
+
     Matrix4f MakeRotationY(float t){
         // TODO:
         // May need radians conversion
 
-        return Matrix4f(cos(t), 0, -sin(t), 0,
-                        0, 1, 0, 0,
-                        sin(t), 0, cos(t), 0,
-                        0, 0, 0, 1); 
-                    // You will need to modify this.
-                    // When you test, test against glm_gtx_transform
+        Matrix4f yRotate(
+        cos(t), 0, -sin(t), 0,
+        0, 1, 0, 0,
+        sin(t), 0, cos(t), 0,
+        0, 0, 0, 1);
+
+        // You will need to modify this.
+        // When you test, test against glm_gtx_transform
     }
     Matrix4f MakeRotationZ(float t){
         // TODO:
         // May need radians conversion
 
-        return Matrix4f(cos(t), sin(t), 0, 0,
-                        -sin(t), cos(t), 0, 0,
-                        0, 0, 1, 0,
-                        0, 0, 0, 1);
+        Matrix4f zRotate(
+        cos(t), -sin(t), 0, 0,
+        sin(t), cos(t), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1);
+
+
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
     }
