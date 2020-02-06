@@ -85,7 +85,7 @@ public:
         // When you test, test against glm_gtx_transform
     }
 
-    Matrix4f MakeRotationY(float t){
+    void MakeRotationY(float t){
         // TODO:
         this->identity();
         this->n[0][0] = cos(t);
@@ -96,19 +96,19 @@ public:
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
     }
-    Matrix4f MakeRotationZ(float t){
+    void MakeRotationZ(float t){
         // TODO:
 
         this->identity();
         this->n[0][0] = cos(t);
         this->n[1][1] = cos(t);
-        this->n[0][1] = -sin(t);
-        this->n[1][0] = sin(t);
+        this->n[0][1] = sin(t);
+        this->n[1][0] = -sin(t);
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
     }
-    Matrix4f MakeScale(float sx,float sy, float sz){
+    void MakeScale(float sx,float sy, float sz){
         // TODO:
 
         this->identity();

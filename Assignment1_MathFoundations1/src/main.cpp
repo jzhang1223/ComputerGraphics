@@ -617,7 +617,7 @@ bool test_m_scale() {
     glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
     glm::mat4 gm1(gv1, gv2, gv3, gv4);
 
-    gm1 = glm::scale(scaleX, scaleY, scaleZ);
+    gm1 = glm::scale(glm::vec3(scaleX, scaleY, scaleZ));
 
     for(int i = 0; i < 4; ++i) {
         for(int j = 0; j < 4; ++j) {
