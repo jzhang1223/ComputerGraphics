@@ -447,6 +447,23 @@ bool test_v_minusequals_0() {
     return true;
 }
 
+bool test_m_identity_values() {
+    Matrix4f m1;
+    m1.identity();
+
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            if(j == i && m1[i][j] != 1) {
+                return false;
+            }
+            if(j != i && m1[i][j] != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 bool test_m_multiply_values(){
         Matrix4f m1(5,2,8,3,
                       7,3,10,3,
@@ -585,14 +602,14 @@ bool test_m_multiply_vector_glm() {
                 10,8,3,8);
     Vector4f v1(3,8,6,2);
 
-    for(int i = 0; i < 4; ++i) {
-        for(int j = 0; j < 4; ++j){
-            std::cout << "(" << i << "," << j << ")=" << m1[i][j] << " ";
-        }
-        std::cout << "\n";
+    // for(int i = 0; i < 4; ++i) {
+    //     for(int j = 0; j < 4; ++j){
+    //         std::cout << "(" << i << "," << j << ")=" << m1[i][j] << " ";
+    //     }
+    //     std::cout << "\n";
 
-    }
-    std::cout << "\n";
+    // }
+    // std::cout << "\n";
 
     Vector4f result = m1 * v1;
 
@@ -602,22 +619,20 @@ bool test_m_multiply_vector_glm() {
     glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
     glm::mat4 gm1 = glm::mat4(gv1, gv2, gv3, gv4);
 
-    for(int i = 0; i < 4; ++i) {
-        for(int j = 0; j < 4; ++j){
-            std::cout << "(" << i << "," << j << ")=" << gm1[i][j] << " ";
-        }
-        std::cout << "\n";
+    // for(int i = 0; i < 4; ++i) {
+    //     for(int j = 0; j < 4; ++j){
+    //         std::cout << "(" << i << "," << j << ")=" << gm1[i][j] << " ";
+    //     }
+    //     std::cout << "\n";
 
-    }
-    std::cout << "\n";
+    // }
+    // std::cout << "\n";
 
 
 
     glm::vec4 gv11(3,8,6,2);
 
     glm::vec4 answer = gm1 * gv11;
-
-
 
     // for(int i = 0; i < 4; ++i) {
     //     std::cout << gv11[i] << " ";
@@ -662,27 +677,27 @@ int main(){
     std::cout << "Passed 4: " << unitTest4() << " \n";
     std::cout << "Passed 5: " << unitTest5() << " \n";
 
-    std::cout << "Passed 6 (Vector Dot Product): " << test_v_dot_0() << " \n";
-    std::cout << "Passed 7 (Vector * Scalar): " << test_v_scalarmult_0() << " \n";
-    std::cout << "Passed 8 (Vector / Scalar): " << test_v_scalardiv_0() << " \n";
-    std::cout << "Passed 9 (-Vector): " << test_v_negate_0() << " \n";
-    std::cout << "Passed 10 (Magnitude of Vector): " << test_v_magnitude_0() << " \n";
-    std::cout << "Passed 11 (Sum of vectors): " << test_v_sum_0() << " \n";
-    std::cout << "Passed 12 (Subtraction of vectors): " << test_v_minus_0() << " \n";
-    std::cout << "Passed 13 (Normalize a vector): " << test_v_normalize_0() << " \n";
-    std::cout << "Passed 14 (Projection onto a vector): " << test_v_projection_0() << " \n";
-    std::cout << "Passed 15 (Cross product of 2 vectors): " << test_v_crossproduct_0() << " \n";
-    std::cout << "Passed 16 (Vector4f constructor: " << test_v_constructor_0() << " \n";
-    std::cout << "Passed 17 (Vector *= scalar): " << test_v_multequals_0() << " \n";
-    std::cout << "Passed 18 (Vector /= scalar): " << test_v_divequals_0() << " \n";
-    std::cout << "Passed 19 (Vector += scalar): " << test_v_plusequals_0() << " \n";
-    std::cout << "Passed 20 (Vector -= scalar): " << test_v_minusequals_0() << " \n";
+    std::cout << "Passed 6 (Vector Dot Product): -------------------" << test_v_dot_0() << " \n";
+    std::cout << "Passed 7 (Vector * Scalar): ---------------" << test_v_scalarmult_0() << " \n";
+    std::cout << "Passed 8 (Vector / Scalar): ----------------" << test_v_scalardiv_0() << " \n";
+    std::cout << "Passed 9 (-Vector): ---------------------------" << test_v_negate_0() << " \n";
+    std::cout << "Passed 10 (Magnitude of Vector): -----------" << test_v_magnitude_0() << " \n";
+    std::cout << "Passed 11 (Sum of vectors): ----------------------" << test_v_sum_0() << " \n";
+    std::cout << "Passed 12 (Subtraction of vectors): ------------" << test_v_minus_0() << " \n";
+    std::cout << "Passed 13 (Normalize a vector): ------------" << test_v_normalize_0() << " \n";
+    std::cout << "Passed 14 (Projection onto a vector): -----" << test_v_projection_0() << " \n";
+    std::cout << "Passed 15 (Cross product of 2 vectors): -" << test_v_crossproduct_0() << " \n";
+    std::cout << "Passed 16 (Vector4f constructor: ---------" << test_v_constructor_0() << " \n";
+    std::cout << "Passed 17 (Vector *= scalar): -------------" << test_v_multequals_0() << " \n";
+    std::cout << "Passed 18 (Vector /= scalar): --------------" << test_v_divequals_0() << " \n";
+    std::cout << "Passed 19 (Vector += scalar): -------------" << test_v_plusequals_0() << " \n";
+    std::cout << "Passed 20 (Vector -= scalar): ------------" << test_v_minusequals_0() << " \n";
 
-    std::cout << "Passed test_m_multiply_values: " << test_m_multiply_values() << "\n";
-    std::cout << "Passed test_m_multiply_glm: " << test_m_multiply_glm() << "\n";
-    std::cout << "Passed test_m_multiply_vector: " << test_m_multiply_vector() << "\n";
-    std::cout << "Passed test_m_multiply_vector_glm: " << test_m_multiply_vector_glm() << "\n";
-
+    std::cout << "Passed test_m_multiply_values: ----------" << test_m_multiply_values() << "\n";
+    std::cout << "Passed test_m_multiply_glm: ----------------" << test_m_multiply_glm() << "\n";
+    std::cout << "Passed test_m_multiply_vector: ----------" << test_m_multiply_vector() << "\n";
+    std::cout << "Passed test_m_multiply_vector_glm: -----" << test_m_multiply_vector_glm() << "\n";
+    std::cout << "Passed test_m_identity_values: ----------" << test_m_identity_values() << "\n";
 
 
     return 0;
