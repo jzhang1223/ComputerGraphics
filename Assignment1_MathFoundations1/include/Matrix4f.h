@@ -73,11 +73,14 @@ public:
     Matrix4f MakeRotationX(float t){
         // TODO:
         // May need radians conversion
+        // Matrix4f m4 = this;
+        Matrix4f xRotate(1, 0, 0, 0,
+                                 0, cos(t), sin(t), 0,
+                                 0, -sin(t), cos(t), 0,
+                                 0, 0, 0, 1);
+        // return &(m4 * xRotate);
 
-        return Matrix4f(1, 0, 0, 0,
-                 0, cos(t), sin(t), 0,
-                 0, -sin(t), cos(t), 0,
-                 0, 0, 0, 1); 
+
                 // You will need to modify this.
                 // When you test, test against glm_gtx_transform
     }
@@ -105,10 +108,31 @@ public:
     }
     Matrix4f MakeScale(float sx,float sy, float sz){
         // TODO:
-        return Matrix4f(sx, 0, 0, 0,
+
+        // Vector4f a = *this
+                // Vector4f a(1.0f,0,0,0);
+
+        // Vector4f b(0.0f,1.0f,0,0);
+        // Vector4f c(0,0,1.0f,0);
+        // Vector4f d(0,0,0,1.0f);
+
+        // Matrix4f temp(a,b,c,d);
+        // Matrix4f result; 
+
+        Matrix4f scale(sx, 0, 0, 0,
                         0, sy, 0, 0,
                         0, 0, sz, 0,
-                        0, 0, 0, 1); 
+                        0, 0, 0, 1);
+        Matrix4f temp(this->n[0][0], this->n[1][0], this->n[2][0], this->n[3][0],
+                        this->n[0][1], this->n[1][1], this->n[2][1], this->n[3][1],
+                        this->n[0][2], this->n[1][2], this->n[2][2], this->n[3][2],
+                        this->n[0][3], this->n[1][3], this->n[2][3], this->n[3][3]);
+
+        // Matrix4f result = scale * temp;
+
+        // return temp;
+
+        return scale;
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform

@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/projection.hpp>
 
 // Sample unit test comparing against GLM.
 bool unitTest0(){
@@ -172,6 +173,367 @@ bool unitTest5(){
     return false;
 }
 
+// Test Vector4f -> Dot
+bool test_v_dot_0() {
+    Vector4f v1 = Vector4f(1, 3, 4, 2);
+    Vector4f v2 = Vector4f(4, 3, 1, 2);
+
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 f = glm::vec4(4.0f, 3.0f, 1.0f, 2.0f);
+
+    float result1 = Dot(v1, v2);
+    float result2 = glm::dot(e, f);
+    
+    if (result1 == result2) {
+        return true;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+// Test multiply vector by a scalar
+bool test_v_scalarmult_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+
+    float scaleFactor = 2;
+
+    Vector4f result1 = v1 * scaleFactor;
+    glm::vec4 result2 = e * scaleFactor;
+
+    for (int i = 0; i < 4; i++) {
+        if (result1[i] != result2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test divide vector by a scalar
+bool test_v_scalardiv_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+
+    float scaleFactor = 2;
+
+    Vector4f result1 = v1 / scaleFactor;
+    glm::vec4 result2 = e / scaleFactor;
+
+    for (int i = 0; i < 4; i++) {
+        if (result1[i] != result2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test negating vector
+bool test_v_negate_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+
+    Vector4f result1 = -v1;
+    glm::vec4 result2 = -e;
+
+    for (int i = 0; i < 4; i++) {
+        if (result1[i] != result2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test magnitude of a vector
+bool test_v_magnitude_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+
+    float result1 = Magnitude(v1);
+    float result2 = glm::length(e);
+
+    if (result1 == result2) {
+        return true;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+// Test sum of 2 vectors
+bool test_v_sum_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    Vector4f v2 = Vector4f(4.0f, 3.0f, 1.0f, 2.0f);
+
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 f = glm::vec4(4.0f, 3.0f, 1.0f, 2.0f);
+
+    Vector4f result1 = v1 + v2;
+    glm::vec4 result2 = e + f;
+    
+    for (int i = 0; i < 4; i++) {
+        if (result1[i] != result2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test subtraction of 2 vectors
+bool test_v_minus_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    Vector4f v2 = Vector4f(4.0f, 3.0f, 1.0f, 2.0f);
+
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 f = glm::vec4(4.0f, 3.0f, 1.0f, 2.0f);
+
+    Vector4f result1 = v1 - v2;
+    glm::vec4 result2 = e - f;
+    
+    for (int i = 0; i < 4; i++) {
+        if (result1[i] != result2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test normalization of a vector
+bool test_v_normalize_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+
+    Vector4f result1 = Normalize(v1);
+    glm::vec4 result2 = glm::normalize(e);
+
+    for (int i = 0; i < 4; i++) {
+        // std::cout << "i: " << i << std::endl;
+        // std::cout << "result1: " << result1[i] << std::endl;
+        // std::cout << "result2: " << result2[i] << std::endl;
+        if (std::abs(result1[i] - result2[i]) > 0.0001f) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test projection of a vector
+bool test_v_projection_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 2.0f);
+    Vector4f v2 = Vector4f(4.0f, 3.0f, 1.0f, 2.0f);
+
+    // Vector Multiplication
+    glm::vec4 e = glm::vec4(1.0f, 3.0f, 4.0f, 2.0f);
+    glm::vec4 f = glm::vec4(4.0f, 3.0f, 1.0f, 2.0f);
+
+    Vector4f result1 = Project(v1, v2);
+    glm::vec4 result2 = glm::proj(e, f);
+
+    for (int i = 0; i < 4; i++) {
+        if (std::abs(result1[i] - result2[i]) > 0.0001f) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Test cross product of a vector
+bool test_v_crossproduct_0() {
+    Vector4f v1 = Vector4f(1.0f, 3.0f, 4.0f, 1.0f);
+    Vector4f v2 = Vector4f(4.0f, 3.0f, 1.0f, 1.0f);
+
+    // Vector Multiplication
+    glm::vec3 e = glm::vec3(1.0f, 3.0f, 4.0f);
+    glm::vec3 f = glm::vec3(4.0f, 3.0f, 1.0f);
+
+    Vector4f result1 = CrossProduct(v1, v2);
+    glm::vec3 result2 = glm::cross(e, f);
+
+    for (int i = 0; i < 3; i++) {
+        // std::cout << "i: " << i << std::endl;
+        // std::cout << "result1: " << result1[i] << std::endl;
+        // std::cout << "result2: " << result2[i] << std::endl;
+        if (std::abs(result1[i] - result2[i]) > 0.0001f) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool test_m_multiply_values(){
+        Matrix4f m1(5,2,8,3,
+                      7,3,10,3,
+                      9,3,2,4,
+                      10,8,3,8);
+        Matrix4f m2(3,12,9,3,
+                      10,1,10,12,
+                      12,4,12,4,
+                      18,9,2,10);
+        Matrix4f m3 = m1 * m2;
+
+        // for(int i = 0; i < 4; ++i) {
+        //     for(int j = 0; j < 4; ++j){
+        //         std::cout << m1[i][j] << " ";
+        //     }
+        //     std::cout << "\n";
+        // }
+
+        // for(int i = 0; i < 4; ++i) {
+        //     for(int j = 0; j < 4; ++j){
+        //         std::cout << m2[i][j] << " ";
+        //     }
+        //     std::cout << "\n";
+        // }
+
+        // for(int i = 0; i < 4; ++i) {
+        //     for(int j = 0; j < 4; ++j){
+        //         std::cout << m3[i][j] << " ";
+        //     }
+        //     std::cout << "\n";
+        // }
+
+
+        return (m3[0][0] == 210 && m3[1][0] == 93 && m3[2][0] == 171 && m3[3][0] == 105 && 
+                m3[0][1] == 267 && m3[1][1] == 149 && m3[2][1] == 146 && m3[3][1] == 169 && 
+                m3[0][2] == 236 && m3[1][2] == 104 && m3[2][2] == 172 && m3[3][2] == 128 && 
+                m3[0][3] == 271 && m3[1][3] == 149 && m3[2][3] == 268 && m3[3][3] == 169);
+}
+
+bool test_m_multiply_glm(){
+    // TODO
+
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
+    Matrix4f m2(3,12,9,3,
+                10,1,10,12,
+                12,4,12,4,
+                18,9,2,10);
+    Matrix4f m3 = m1 * m2;
+
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
+    glm::mat4 gm1 = glm::mat4(gv1, gv2, gv3, gv4);
+
+    glm::vec4 gv11(3.0f, 12.0f, 9.0f, 3.0f);
+    glm::vec4 gv22(10.0f, 1.0f, 10.0f, 12.0f);
+    glm::vec4 gv33(12.0f, 4.0f, 12.0f, 4.0f);
+    glm::vec4 gv44(18.0f, 9.0f, 2.0f, 10.0f);
+    glm::mat4 gm2 = glm::mat4(gv11, gv22, gv33, gv44);
+
+    glm::mat4 gm3 = gm1 * gm2;
+
+    return (gm3[0][0]==m3(0,0) &&
+            gm3[0][1]==m3(0,1) &&
+            gm3[0][2]==m3(0,2) &&
+            gm3[0][3]==m3(0,3) &&
+            gm3[1][0]==m3(1,0) &&
+            gm3[1][1]==m3(1,1) &&
+            gm3[1][2]==m3(1,2) &&
+            gm3[1][3]==m3(1,3) &&
+            gm3[2][0]==m3(2,0) &&
+            gm3[2][1]==m3(2,1) &&
+            gm3[2][2]==m3(2,2) &&
+            gm3[2][3]==m3(2,3) &&
+            gm3[3][0]==m3(3,0) &&
+            gm3[3][1]==m3(3,1) &&
+            gm3[3][2]==m3(3,2) &&
+            gm3[3][3]==m3(3,3));
+}
+
+bool test_m_multiply_vector() {
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
+    Vector4f v1(3,8,6,2);
+
+    Vector4f result = m1 * v1;
+
+    Vector4f answer(145,64,122,73);
+
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << answer[i] << " ";
+    // }
+    // std::cout << "\n";
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << result[i] << " ";
+    // }
+    // std::cout << "\n";
+
+    return (answer[0] == result[0] &&
+            answer[1] == result[1] &&
+            answer[2] == result[2] &&
+            answer[3] == result[3]);
+}
+
+bool test_m_multiply_vector_glm() {
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
+    Vector4f v1(3,8,6,2);
+
+    Vector4f result = m1 * v1;
+
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
+    glm::mat4 gm1 = glm::mat4(gv1, gv2, gv3, gv4);
+
+    glm::vec4 gv11(3,8,6,2);
+
+    glm::vec4 answer = gm1 * gv11;
+
+    // for(int i = 0; i < 4; ++i) {
+    //     for(int j = 0; j < 4; ++j){
+    //         std::cout << gm1[i][j] << " ";
+    //     }
+    //     std::cout << "\n";
+    // }
+    // std::cout << "\n";
+
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << gv11[i] << " ";
+    // }
+    // std::cout << "\n";
+
+
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << answer[i] << " ";
+    // }
+    // std::cout << "\n------\n";
+
+    // for(int i = 0; i < 4; ++i) {
+    //     for(int j = 0; j < 4; ++j){
+    //         std::cout << m1[i][j] << " ";
+    //     }
+    //     std::cout << "\n";
+
+    // }
+    // std::cout << "\n";
+
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << v1[i] << " ";
+    // }
+    // std::cout << "\n";
+
+    // for(int i = 0; i < 4; ++i) {
+    //     std::cout << result[i] << " ";
+    // }
+
+    // std::cout << "\n-----\n";
+
+    return (answer[0] == result[0] &&
+            answer[1] == result[1] &&
+            answer[2] == result[2] &&
+            answer[3] == result[3]);
+}
+
 int main(){
     // Keep track of the tests passed
     unsigned int testsPassed = 0;
@@ -183,6 +545,24 @@ int main(){
     std::cout << "Passed 3: " << unitTest3() << " \n";
     std::cout << "Passed 4: " << unitTest4() << " \n";
     std::cout << "Passed 5: " << unitTest5() << " \n";
+
+    std::cout << "Passed 6 (Vector Dot Product): " << test_v_dot_0() << " \n";
+    std::cout << "Passed 7 (Vector * Scalar): " << test_v_scalarmult_0() << " \n";
+    std::cout << "Passed 8 (Vector / Scalar): " << test_v_scalardiv_0() << " \n";
+    std::cout << "Passed 9 (-Vector): " << test_v_negate_0() << " \n";
+    std::cout << "Passed 10 (Magnitude of Vector): " << test_v_magnitude_0() << " \n";
+    std::cout << "Passed 11 (Sum of vectors): " << test_v_sum_0() << " \n";
+    std::cout << "Passed 12 (Subtraction of vectors): " << test_v_minus_0() << " \n";
+    std::cout << "Passed 13 (Normalize a vector): " << test_v_normalize_0() << " \n";
+    std::cout << "Passed 14 (Projection onto a vector): " << test_v_projection_0() << " \n";
+    std::cout << "Passed 15 (Cross product of 2 vectors): " << test_v_crossproduct_0() << " \n";
+
+    std::cout << "Passed test_m_multiply_values: " << test_m_multiply_values() << "\n";
+    std::cout << "Passed test_m_multiply_glm: " << test_m_multiply_glm() << "\n";
+    std::cout << "Passed test_m_multiply_vector: " << test_m_multiply_vector() << "\n";
+    std::cout << "Passed test_m_multiply_vector_glm: " << test_m_multiply_vector_glm() << "\n";
+
+
 
     return 0;
 }

@@ -86,7 +86,7 @@ inline float Dot(const Vector4f& a, const Vector4f& b){
 
 // Multiplication of a vector by a scalar values
 inline Vector4f operator *(const Vector4f& v, float s){
-  Vector4f vec = Vector4f(v[0] * s, v[1] * s, -v[2] * s, -v[3] * s);
+  Vector4f vec = Vector4f(v[0] * s, v[1] * s, v[2] * s, v[3] * s);
   return vec;
 }
 
