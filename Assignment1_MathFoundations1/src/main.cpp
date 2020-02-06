@@ -483,31 +483,12 @@ bool test_m_rotateX() {
     }
     std::cout << "\n";
 
-    // for(int i = 0; i < 4; i++) {
-    //     for(int j = 0; j < 4; j++) {
-    //         std::cout << rotated[i][j] << " ";
-    //     }
-    //     std::cout << "\n";
-    // }
-
-
     glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
     glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
     glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
     glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
     glm::mat4 gm1(gv1, gv2, gv3, gv4);
-    // glm::mat4 gm1 = glm::rotate(gv1, gv2, gv3, gv4);
-    // gm1 = glm::transpose(gm1);
 
-
-    // std::cout << "\n";
-    // for(int i = 0; i < 4; i++) {
-    //     for(int j = 0; j < 4; j++) {
-    //         std::cout << gm1[i][j] << " ";
-    //     }
-    //     std::cout << "\n";
-    // }
-    // gm1 = glm::rotate(5.f, 1);
     gm1 = glm::rotate(angle, glm::vec3(1,0,0));
 
     std::cout << "\n";
@@ -518,8 +499,50 @@ bool test_m_rotateX() {
         std::cout << "\n";
     }
 
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            if(abs(m1[i][j] - gm1[i][j]) > .0001f) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool test_m_rotateY() {
+
+    float angle = 7.f;
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
 
 
+    m1.MakeRotationY(angle);
+
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            std::cout << m1[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
+    glm::mat4 gm1(gv1, gv2, gv3, gv4);
+
+    gm1 = glm::rotate(angle, glm::vec3(0,1,0));
+
+    std::cout << "\n";
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            std::cout << gm1[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
 
     for(int i = 0; i < 4; ++i) {
         for(int j = 0; j < 4; ++j) {
@@ -530,6 +553,83 @@ bool test_m_rotateX() {
     }
     return true;
 }
+
+bool test_m_rotateZ() {
+
+    float angle = 9.f;
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
+
+
+    m1.MakeRotationZ(angle);
+
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            std::cout << m1[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
+    glm::mat4 gm1(gv1, gv2, gv3, gv4);
+
+    gm1 = glm::rotate(angle, glm::vec3(0,0,1));
+
+    std::cout << "\n";
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            std::cout << gm1[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            if(abs(m1[i][j] - gm1[i][j]) > .0001f) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool test_m_scale() {
+
+    float scaleX = 1.5f;
+    float scaleY = 0.5f;
+    float scaleZ = 2.0f;
+
+    Matrix4f m1(5,2,8,3,
+                7,3,10,3,
+                9,3,2,4,
+                10,8,3,8);
+    m1.MakeScale(scaleX, scaleY, scaleZ);
+
+    glm::vec4 gv1(5.0f, 2.0f, 8.0f, 3.0f);
+    glm::vec4 gv2(7.0f, 3.0f, 10.0f, 3.0f);
+    glm::vec4 gv3(9.0f, 3.0f, 2.0f, 4.0f);
+    glm::vec4 gv4(10.0f, 8.0f, 3.0f, 8.0f);
+    glm::mat4 gm1(gv1, gv2, gv3, gv4);
+
+    gm1 = glm::scale(scaleX, scaleY, scaleZ);
+
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            if(abs(m1[i][j] - gm1[i][j]) > .0001f) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
 
 bool test_m_multiply_values(){
         Matrix4f m1(5,2,8,3,
@@ -766,6 +866,11 @@ int main(){
     std::cout << "Passed test_m_multiply_vector_glm: -----" << test_m_multiply_vector_glm() << "\n";
     std::cout << "Passed test_m_identity_values: ----------" << test_m_identity_values() << "\n";
     std::cout << "Passed test_m_rotateX: -----------------" << test_m_rotateX() << "\n";
+    std::cout << "Passed test_m_rotateY: -----------------" << test_m_rotateY() << "\n";
+    std::cout << "Passed test_m_rotateZ: -----------------" << test_m_rotateZ() << "\n";
+    std::cout << "Passed test_m_scale: -----------------" << test_m_scale() << "\n";
+
+
 
 
     return 0;
