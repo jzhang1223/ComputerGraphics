@@ -75,26 +75,11 @@ public:
     // Make a matrix rotate about various axis
     void MakeRotationX(float t){
         // TODO:
-        // May need radians conversion
-        // t = (t * PI) / 180;
-        // float radValue = (t * PI) / 180;
-
-        // Matrix4f xRotate(
-        // 1, 0, 0, 0,
-        // 0, cos(radValue), -sin(radValue), 0,
-        // 0, sin(radValue), cos(radValue), 0,
-        // 0, 0, 0, 1);
-
-        // std::cout << cos(radValue) << " \n";
         this->identity();
         this->n[1][1] = cos(t);
         this->n[2][2] = cos(t);
         this->n[2][1] = -sin(t);
         this->n[1][2] = sin(t);
-
-
-
-        // return result;
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
@@ -102,27 +87,23 @@ public:
 
     Matrix4f MakeRotationY(float t){
         // TODO:
-        // May need radians conversion
-
-        Matrix4f yRotate(
-        cos(t), 0, -sin(t), 0,
-        0, 1, 0, 0,
-        sin(t), 0, cos(t), 0,
-        0, 0, 0, 1);
+        this->identity();
+        this->n[0][0] = cos(t);
+        this->n[2][2] = cos(t);
+        this->n[0][2] = -sin(t);
+        this->n[2][0] = sin(t);
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
     }
     Matrix4f MakeRotationZ(float t){
         // TODO:
-        // May need radians conversion
 
-        Matrix4f zRotate(
-        cos(t), -sin(t), 0, 0,
-        sin(t), cos(t), 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1);
-
+        this->identity();
+        this->n[0][0] = cos(t);
+        this->n[1][1] = cos(t);
+        this->n[0][1] = -sin(t);
+        this->n[1][0] = sin(t);
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
@@ -130,30 +111,11 @@ public:
     Matrix4f MakeScale(float sx,float sy, float sz){
         // TODO:
 
-        // Vector4f a = *this
-                // Vector4f a(1.0f,0,0,0);
-
-        // Vector4f b(0.0f,1.0f,0,0);
-        // Vector4f c(0,0,1.0f,0);
-        // Vector4f d(0,0,0,1.0f);
-
-        // Matrix4f temp(a,b,c,d);
-        // Matrix4f result; 
-
-        Matrix4f scale(sx, 0, 0, 0,
-                        0, sy, 0, 0,
-                        0, 0, sz, 0,
-                        0, 0, 0, 1);
-        Matrix4f temp(this->n[0][0], this->n[1][0], this->n[2][0], this->n[3][0],
-                        this->n[0][1], this->n[1][1], this->n[2][1], this->n[3][1],
-                        this->n[0][2], this->n[1][2], this->n[2][2], this->n[3][2],
-                        this->n[0][3], this->n[1][3], this->n[2][3], this->n[3][3]);
-
-        // Matrix4f result = scale * temp;
-
-        // return temp;
-
-        return scale;
+        this->identity();
+        this->n[0][0] = sx;
+        this->n[1][1] = sy;
+        this->n[2][2] = sz;
+        this->n[3][3] = 1;
 
         // You will need to modify this.
         // When you test, test against glm_gtx_transform
