@@ -12,8 +12,8 @@ BasicWidget::~BasicWidget()
   vbo_.release();
   vbo_.destroy();
   // TODO: Remove the CBO
-  cbo_.release();
-  cbo_.destroy();
+  // cbo_.release();
+  // cbo_.destroy();
   // End TODO
   ibo_.release();
   ibo_.destroy();
@@ -157,10 +157,10 @@ void BasicWidget::initializeGL()
   // END TODO
   
   // TODO:  Remove the cbo_
-  cbo_.create();
-  cbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
-  cbo_.bind();
-  cbo_.allocate(colors, 3 * 4 * sizeof(GL_FLOAT));
+  // cbo_.create();
+  // cbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
+  // cbo_.bind();
+  // cbo_.allocate(colors, 3 * 4 * sizeof(GL_FLOAT));
   // END TODO
 
   // TODO:  Generate our index buffer
@@ -179,7 +179,7 @@ void BasicWidget::initializeGL()
   //        of bytes!
   shaderProgram_.enableAttributeArray(0);
   shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3);
-  cbo_.bind();
+  // cbo_.bind();
   shaderProgram_.enableAttributeArray(1);
   shaderProgram_.setAttributeBuffer(1, GL_FLOAT, 0, 4);
   // END TODO
