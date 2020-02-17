@@ -7,6 +7,8 @@
 #include <QtCore/QtMath>
 // #include <glm/glm.hpp>
 
+// #include <unistd.h>
+
 class OBJ {
 
 private:
@@ -28,7 +30,12 @@ public:
 
         FILE *file = fopen(path, "r");
         if (file == NULL) {
-            printf("No file path found!");
+            printf("No file path found!: ");
+            printf(path);
+
+            // char cwd[PATH_MAX];
+            // getcwd()
+            // printf("\nCurrent working dir: %s\n", cwd);
             // TODO: probably throw some exception...
 
             // return false;
@@ -51,8 +58,9 @@ public:
             // parse vertices
             else if(lineHeader == "v") {
             // QVector3D
-                QVector3D vertex;
-                fscanf(file, "%f %f %f\n", &vertex.x, vertex.y, vertex.z);
+                float a, b, c;
+                fscanf(file, "%f %f %f\n", &a, &b, &c);
+                QVector3D vertex(a, b, c);
                 temp_vertices.push_back(vertex);
             }
             // else if (lineHeader == "vt") {
@@ -95,11 +103,11 @@ public:
 
 
         // Processing the data
-        for(int i = 0; i < vertexIndices.size(); i++) {
-            int vertexIndex = vertexIndices[i];
-            QVector3D vertex = temp_vertices[vertexIndex-1];
-            out_vertices.push_back(vertex);
-        }
+        // for(int i = 0; i < vertexIndices.size(); i++) {
+        //     int vertexIndex = vertexIndices[i];
+        //     QVector3D vertex = temp_vertices[vertexIndex-1];
+        //     out_vertices.push_back(vertex);
+        // }
 
         //
         // for(int i = 0; i < uvIndices.size(); i++) {
@@ -109,11 +117,11 @@ public:
         //     out_uvs.push_back(uv);
         // }
 
-        for(int i = 0; i < normalIndices.size(); i++) {
-            int normalIndex = normalIndices[i];
-            QVector3D normal = temp_normals[normalIndex-1];
-            out_normals.push_back(normal);
-        }
+        // for(int i = 0; i < normalIndices.size(); i++) {
+        //     int normalIndex = normalIndices[i];
+        //     QVector3D normal = temp_normals[normalIndex-1];
+        //     out_normals.push_back(normal);
+        // }
     }
 
     // void draw() {
