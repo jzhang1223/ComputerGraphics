@@ -39,7 +39,7 @@ QString BasicWidget::vertexShaderString() const
     "void main()\n"
     "{\n"
     // TODO: gl_Position must be updated!
-    "  gl_Position = vec4(position, 1.0);\n"
+    "  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);\n"
     // END TODO
     "  vertColor = color;\n"
     "}\n";
@@ -199,6 +199,25 @@ void BasicWidget::resizeGL(int w, int h)
   glViewport(0, 0, w, h);
   // TODO:  Set up the model, view, and projection matrices
   // bind the shader first...shaderProgram_
+  shaderProgram_.bind();
+
+  // use built-in methods to create matrices for scale, rotate, translate...
+
+  model_.setToIdentity();
+  model_.translate(0, -.5);
+  model_.scale(.5, .5, 1);
+  // model_.rotate(0, 0, 0, 1);
+  view_.setToIdentity();
+  // view_.rotate(0, 0, 0, 1);
+  view_.translate(.5, .5);
+  // view_.scale(.8, .8, 1);
+  projection_.setToIdentity();
+
+  shaderProgram_.setUniformValue("modelMatrix", model_);
+  shaderProgram_.setUniformValue("viewMatrix", view_);
+  shaderProgram_.setUniformValue("projectionMatrix", projection_);
+
+  shaderProgram_.release();
   // END TODO
 }
 
