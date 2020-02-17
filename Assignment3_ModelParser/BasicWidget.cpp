@@ -22,9 +22,28 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
 {
   // TODO
   // Handle key events here.
-  qDebug() << "You Pressed an unsupported Key!";
+  printf("%s\n", keyEvent->text());
+  if (keyEvent->key() == Qt::Key_Q) {
+    qDebug() << "Q Key Pressed";
+    QCoreApplication::quit(); // exits with return code 0
+  } else if (keyEvent->key() == Qt::Key_W) {
+    qDebug() << "W Key Pressed";
+    // switch to rendering in wireframe mode
+    update()
+  } else if (keyEvent->key() == Qt::Key_1) {
+    qDebug() << "1 Key Pressed";
+    // render obj = bunny
+    update()
+  } else if (keyEvent->key() == Qt::Key_2) {
+    qDebug() << "1 Key Pressed";
+    // render obj = monkey
+    update();
+  } else {
+    qDebug() << "You Pressed an unsupported Key!";
+  }
   // ENDTODO
 }
+
 void BasicWidget::initializeGL()
 {
   makeCurrent();
