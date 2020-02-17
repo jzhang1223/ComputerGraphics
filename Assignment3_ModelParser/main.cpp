@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtOpenGL>
+// #include "obj.cpp"
 
 // Lab application
 #include "Application.h"

@@ -1,5 +1,7 @@
 #include "BasicWidget.h"
 
+#include "obj.cpp"
+
 //////////////////////////////////////////////////////////////////////
 // Publics
 BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent)
@@ -54,4 +56,6 @@ void BasicWidget::paintGL()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // TODO:  render.
+  OBJ myOBJ("./objects/cube.obj");
+  // myOBJ.draw();
 }
