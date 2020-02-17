@@ -2,6 +2,9 @@
 #include <vector>
 #include <stdio.h>
 #include <QVector3D>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 // ??
 #include <QtCore/QtMath>
@@ -18,7 +21,7 @@ private:
 
 public:
 
-    OBJ(const char * path) {
+    OBJ(std::string path) {
 
         // std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
         std::vector<unsigned int> vertexIndices, normalIndices;
@@ -27,42 +30,97 @@ public:
         // std::vector<QVector2D> temp_uvs;
         std::vector<QVector3D> temp_normals;
 
+// NEW
+        std::ifstream inFile;
+        inFile.open(path);
 
-        FILE *file = fopen(path, "r");
-        if (file == NULL) {
-            printf("No file path found!: ");
-            printf(path);
+        std::cout << "Loading: " << path << "\n";
 
-            // char cwd[PATH_MAX];
-            // getcwd()
-            // printf("\nCurrent working dir: %s\n", cwd);
-            // TODO: probably throw some exception...
+        if(inFile.is_open()) {
+            std::string line;
+            while(getline(inFile, line)) {
+                if(line[0] == '#') {
+                    continue;
+                }
+                std::istringstream iss(line);
+                std::string lineHeader;
+                iss >> lineHeader;
+                if(lineHeader == "v") {
+                    float x, y, z;
+                    iss >> x >> y >> z;
+                    QVector3D vec(x, y, z);
+                    temp_vertices.push_back(vec);
+                    printf("v: %f %f %f\n", vec.x(), vec.y(), vec.z());
+                }
 
-            // return false;
+                else if(lineHeader == "vn") {
+                    float x, y, z;
+                    iss >> x >> y >> z;
+                    QVector3D normal(x, y, z);
+                    temp_vertices.push_back(normal);
+                    printf("vn: %f %f %f\n", normal.x(), normal.y(), normal.z());
+                }
+
+                else if(lineHeader == "f") {
+                    // printf("%s",line);
+                    // printf("f\n");
+                    //f 1//1 5//5 2//2
+                    int v1, n1, v2, n2, v3, n3;
+                    v1 = line[2];
+                    n1 = line[5];
+                    v2 = line[7];
+                    n2 = line[10];
+                    v3 = line[12];
+                    n3 = line[15];
+
+                    for(int i = 0; i < 16; i++) {
+                        std::cout << line[i];
+                    }
+                    printf("\n");
+                    // printf("f %d%d %d%d %d%d", v1, n1, v2, n2, v3, n3);
+                    // iss >> a >> b >> c;
+
+                }
+            }
+
+            // DO SOME PUSHING HERE
         }
+// END
+
+        // FILE *file = fopen(path, "r");
+        // if (file == NULL) {
+        //     printf("No file path found!: ");
+        //     printf(path);
+        // }
 
         // TODO: Check file empty?
-        while(1) {
-            char lineHeader[128];
-            // read first word
-            int res = fscanf(file, "%s", lineHeader);
-            // End of file
-            if(res == EOF) {
-                break;
-            }
+        // while(1) {
+        //     char lineHeader[128];
+        //     // read first word
+        //     int res = fscanf(file, "%s", lineHeader);
 
-            else if(lineHeader[0] == '#') {
-            // do nothing?
-            }
+        //     printf(lineHeader);
+        //     printf("\n");
 
-            // parse vertices
-            else if(lineHeader == "v") {
-            // QVector3D
-                float a, b, c;
-                fscanf(file, "%f %f %f\n", &a, &b, &c);
-                QVector3D vertex(a, b, c);
-                temp_vertices.push_back(vertex);
-            }
+        //     // End of file
+        //     if(res == EOF) {
+        //         printf("Reached EOF");
+        //         break;
+        //     }
+
+        //     else if(lineHeader[0] == '#') {
+        //     // do nothing?
+        //     }
+
+        //     // parse vertices
+        //     else if(lineHeader == "v") {
+        //     // QVector3D
+        //         float a, b, c;
+        //         fscanf(file, "%f %f %f\n", &a, &b, &c);
+        //         QVector3D vertex(a, b, c);
+        //         temp_vertices.push_back(vertex);
+        //         printf("Storing: %f %f %f\n", a, b, c);
+        //     }
             // else if (lineHeader == "vt") {
 
             // }
@@ -86,7 +144,6 @@ public:
             //     if(matches != 9) {
             //         printf("Polygon face elements could not be parsed");
             //         // TODO: Probably throw some exception...
-            //         // return false;
             //     }
 
             //     vertexIndices.push_back(vertexIndex[0]);
@@ -99,7 +156,7 @@ public:
             //     normalIndices.push_back(normalIndex[1]);
             //     normalIndices.push_back(normalIndex[2]);
             // }
-        }
+        // }
 
 
         // Processing the data

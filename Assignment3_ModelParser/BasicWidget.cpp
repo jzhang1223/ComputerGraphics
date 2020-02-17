@@ -56,7 +56,6 @@ void BasicWidget::paintGL()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // TODO:  render.
-  // OBJ myOBJ("C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment3_ModelParser/objects/cube.obj");
-  OBJ myOBJ("../objects/cube.obj");
+  OBJ myOBJ("../../objects/cube.obj");
   // myOBJ.draw();
 }
