@@ -45,6 +45,7 @@ public:
                 std::istringstream iss(line);
                 std::string lineHeader;
                 iss >> lineHeader;
+
                 if(lineHeader == "v") {
                     float x, y, z;
                     iss >> x >> y >> z;
@@ -57,33 +58,43 @@ public:
                     float x, y, z;
                     iss >> x >> y >> z;
                     QVector3D normal(x, y, z);
-                    temp_vertices.push_back(normal);
+                    temp_normals.push_back(normal);
                     printf("vn: %f %f %f\n", normal.x(), normal.y(), normal.z());
                 }
 
                 else if(lineHeader == "f") {
-                    // printf("%s",line);
-                    // printf("f\n");
-                    //f 1//1 5//5 2//2
                     int v1, n1, v2, n2, v3, n3;
-                    v1 = line[2];
-                    n1 = line[5];
-                    v2 = line[7];
-                    n2 = line[10];
-                    v3 = line[12];
-                    n3 = line[15];
+                    sscanf(line.c_str(), "f %d//%d %d//%d %d//%d", &v1, &n1, &v2, &n2, &v3, &n3);
 
-                    for(int i = 0; i < 16; i++) {
-                        std::cout << line[i];
-                    }
                     printf("\n");
-                    // printf("f %d%d %d%d %d%d", v1, n1, v2, n2, v3, n3);
-                    // iss >> a >> b >> c;
+                    printf("f: %d%d %d%d %d%d", v1, n1, v2, n2, v3, n3);
+
+
+                    // int vertexIndex[3], normalIndex[3];
+                    vertexIndices.push_back(v1);
+                    vertexIndices.push_back(v2);
+                    vertexIndices.push_back(v3);
+
+                    normalIndices.push_back(n1);
+                    normalIndices.push_back(n2);
+                    normalIndices.push_back(n3);
+
 
                 }
             }
-
+            printf("Done");
             // DO SOME PUSHING HERE
+            for(int i = 0; i < vertexIndices.size(); i++) {
+                int vertexIndex = vertexIndices[i];
+                QVector3D vertex = temp_vertices[vertexIndex-1];
+                out_vertices.push_back(vertex);
+            }
+
+            for(int i = 0; i < normalIndices.size(); i++) {
+                int normalIndex = normalIndices[i];
+                QVector3D normal = temp_normals[normalIndex-1];
+                out_normals.push_back(normal);
+            }
         }
 // END
 
