@@ -1,12 +1,15 @@
 #include "BasicWidget.h"
+// #include "obj.cpp"
 
-#include "obj.cpp"
+#include <QByteArray>
 
 //////////////////////////////////////////////////////////////////////
 // Publics
 BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLBuffer::VertexBuffer), ibo_(QOpenGLBuffer::IndexBuffer), logger_(this)
 {
   setFocusPolicy(Qt::StrongFocus);
+  OBJ bunny("../../objects/cube.obj");
+
 }
 
 BasicWidget::~BasicWidget()
@@ -87,6 +90,7 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
     QCoreApplication::quit(); // exits with return code 0
   } else if (keyEvent->key() == Qt::Key_W) {
     qDebug() << "W Key Pressed";
+    renderWireframe = !renderWireframe;
     // switch to rendering in wireframe mode
     update();
   } else if (keyEvent->key() == Qt::Key_1) {
@@ -119,39 +123,56 @@ void BasicWidget::initializeGL()
 
   createShader();
 
-  static const GLfloat verts[21] =
-  {
-    0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Center vertex position
-    1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top right vertex position
-    -1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f  // Top left vertex position
-  };
+  // OBJ monkey("../../objects/monkey.obj");
 
-  static const GLuint idx[3] =
-  {
-      0, 1, 2
-  };
+  // bunny("../../objects/bunny.obj");
+  // OBJ bunny("../../objects/bunny.obj");
+  // bunny = new OBJ("../../objects/bunny.obj");
+  OBJ bunny("../../objects/cube.obj");
+  // static int indexSize = bunny.out_indices.size();
+
+
+
+
+  // static const GLfloat verts[21] =
+  // {
+  //   0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Center vertex position
+  //   1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top right vertex position
+  //   -1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f  // Top left vertex position
+  // };
+
+  // static const GLuint idx[3] =
+  // {
+  //     0, 1, 2
+  // };
 
   shaderProgram_.bind();
 
   vbo_.create();
   vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   vbo_.bind();
-  vbo_.allocate(verts, 3 * 7 * sizeof(GL_FLOAT));
+  // vbo_.allocate(verts, 3 * 7 * sizeof(GL_FLOAT));
+  vbo_.allocate(bunny.out_vertices.data(), bunny.out_vertices.size() * sizeof(GL_FLOAT));
+
 
   ibo_.create();
   ibo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   ibo_.bind();
-  ibo_.allocate(idx, 7 * sizeof(GL_UNSIGNED_INT));
+  // ibo_.allocate(idx, 7 * sizeof(GL_UNSIGNED_INT));
+  // TODO: USE SIZE OF REGULAR INT
+  ibo_.allocate(bunny.out_indices.data(), bunny.out_indices.size() * sizeof(GL_UNSIGNED_INT));
+
 
   vao_.create();
   vao_.bind();
   vbo_.bind();
 
   shaderProgram_.enableAttributeArray(0);
-  shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3, 7 * sizeof(GL_FLOAT));
+  // shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3, 7 * sizeof(GL_FLOAT));
+  shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3);
 
-  shaderProgram_.enableAttributeArray(1);
-  shaderProgram_.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GL_FLOAT), 4, 7 * sizeof(GL_FLOAT));
+  // shaderProgram_.enableAttributeArray(1);
+  // shaderProgram_.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GL_FLOAT), 4, 7 * sizeof(GL_FLOAT));
 
   ibo_.bind();
 
@@ -177,12 +198,15 @@ void BasicWidget::paintGL()
   glClearColor(0.f, 0.f, 0.f, 1.f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  renderWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
   // TODO:  render.
-  OBJ myOBJ("../../objects/cube.obj");
+  // TODO: DELETE THIS LATER!!!
+
 
   shaderProgram_.bind();
   vao_.bind();
-  glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
   vao_.release();
   shaderProgram_.release();
 

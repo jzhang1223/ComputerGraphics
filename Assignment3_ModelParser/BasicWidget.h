@@ -46,6 +46,8 @@
 #include <QtWidgets>
 #include <QtOpenGL>
 
+#include "obj.cpp"
+
 /**
  * This is just a basic OpenGL widget that will allow a change of background color.
  */

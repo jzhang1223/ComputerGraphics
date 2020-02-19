@@ -19,18 +19,16 @@ private:
 
 public:
 
-    std::vector<QVector3D> out_vertices;
-    // std::vector<QVector2D> out_uvs;
-    std::vector<QVector3D> out_normals;
+    std::vector<float> out_vertices;
+    std::vector<float> out_normals;
+    std::vector<uint> out_indices;
 
     OBJ(std::string path) {
 
-        // std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
-        std::vector<unsigned int> vertexIndices, normalIndices;
+        // std::vector<unsigned int> vertexIndices, normalIndices;
 
-        std::vector<QVector3D> temp_vertices;
-        // std::vector<QVector2D> temp_uvs;
-        std::vector<QVector3D> temp_normals;
+        // std::vector<float> temp_vertices;
+        // std::vector<float> temp_normals;
 
 // NEW
         std::ifstream inFile;
@@ -51,52 +49,86 @@ public:
                 if(lineHeader == "v") {
                     float x, y, z;
                     iss >> x >> y >> z;
-                    QVector3D vec(x, y, z);
-                    temp_vertices.push_back(vec);
-                    printf("v: %f %f %f\n", vec.x(), vec.y(), vec.z());
+                    out_vertices.push_back(x);
+                    out_vertices.push_back(y);
+                    out_vertices.push_back(z);
+                    printf("v: %f %f %f\n", x, y, z);
                 }
 
                 else if(lineHeader == "vn") {
                     float x, y, z;
                     iss >> x >> y >> z;
-                    QVector3D normal(x, y, z);
-                    temp_normals.push_back(normal);
-                    printf("vn: %f %f %f\n", normal.x(), normal.y(), normal.z());
+                    // QVector3D normal(x, y, z);
+                    out_normals.push_back(x);
+                    out_normals.push_back(y);
+                    out_normals.push_back(z);
+
+                    printf("vn: %f %f %f\n", x, y, z);
                 }
 
                 else if(lineHeader == "f") {
-                    int v1, n1, v2, n2, v3, n3;
+                    uint v1, n1, v2, n2, v3, n3;
                     sscanf(line.c_str(), "f %d//%d %d//%d %d//%d", &v1, &n1, &v2, &n2, &v3, &n3);
 
                     printf("\n");
                     printf("f: %d%d %d%d %d%d", v1, n1, v2, n2, v3, n3);
 
 
-                    // int vertexIndex[3], normalIndex[3];
-                    vertexIndices.push_back(v1);
-                    vertexIndices.push_back(v2);
-                    vertexIndices.push_back(v3);
+                    out_indices.push_back(v1);
+                    out_indices.push_back(n1);
+                    out_indices.push_back(v2);
+                    out_indices.push_back(n2);
+                    out_indices.push_back(v3);
+                    out_indices.push_back(n3);
 
-                    normalIndices.push_back(n1);
-                    normalIndices.push_back(n2);
-                    normalIndices.push_back(n3);
+                    // int vertexIndex[3], normalIndex[3];
+                    // vertexIndices.push_back(v1);
+                    // vertexIndices.push_back(v2);
+                    // vertexIndices.push_back(v3);
+
+                    // normalIndices.push_back(n1);
+                    // normalIndices.push_back(n2);
+                    // normalIndices.push_back(n3);
 
 
                 }
             }
-            printf("Done");
-            // DO SOME PUSHING HERE
-            for(int i = 0; i < vertexIndices.size(); i++) {
-                int vertexIndex = vertexIndices[i];
-                QVector3D vertex = temp_vertices[vertexIndex-1];
-                out_vertices.push_back(vertex);
-            }
+            printf("\nDone\n");
+            // for(int i = 0; i < vertexIndices.size(); i++) {
+            //     int vertexIndex = vertexIndices[i];
+            //     QVector3D vertex = temp_vertices[vertexIndex-1];
+            //     out_vertices.push_back(vertex);
+            // }
 
-            for(int i = 0; i < normalIndices.size(); i++) {
-                int normalIndex = normalIndices[i];
-                QVector3D normal = temp_normals[normalIndex-1];
-                out_normals.push_back(normal);
+            // for(int i = 0; i < normalIndices.size(); i++) {
+            //     int normalIndex = normalIndices[i];
+            //     QVector3D normal = temp_normals[normalIndex-1];
+            //     out_normals.push_back(normal);
+            // }
+
+            // for(int i = 0; i < vertexIndices.size(); i++) {
+            //     int vertexIndex = vertexIndices[i] * 3;
+            //     out_vertices.push_back(temp_vertices[vertexIndex - 3]);
+            //     out_vertices.push_back(temp_vertices[vertexIndex - 2]);
+            //     out_vertices.push_back(temp_vertices[vertexIndex - 1]);
+            // }
+
+            // for(int i = 0; i < normalIndices.size(); i++) {
+            //     int normalIndex = normalIndices[i] * 3;
+            //     out_normals.push_back(temp_normals[normalIndex - 3]);
+            //     out_normals.push_back(temp_normals[normalIndex - 2]);
+            //     out_normals.push_back(temp_normals[normalIndex - 1]);
+            // }
+
+            for(int i = 0; i < out_vertices.size(); i++) {
+                printf("%f ", out_vertices[i]);
             }
+            printf("Printed vertices\n");
+
+            for(int i = 0; i < out_vertices.size(); i++) {
+                printf("%f ", out_normals[i]);
+            }
+            printf("Printed normals");
         }
 // END
 
@@ -193,8 +225,5 @@ public:
         //     out_normals.push_back(normal);
         // }
     }
-
-    // void draw() {
-    //     glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(QVector3D), this->vertices[0], GL_STATIC_DRAW);
-    // }
+    // file.close();
 };
