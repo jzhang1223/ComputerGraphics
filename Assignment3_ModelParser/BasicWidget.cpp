@@ -8,7 +8,6 @@
 BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLBuffer::VertexBuffer), ibo_(QOpenGLBuffer::IndexBuffer), logger_(this)
 {
   setFocusPolicy(Qt::StrongFocus);
-  OBJ bunny("../../objects/cube.obj");
 
 }
 
@@ -202,6 +201,7 @@ void BasicWidget::paintGL()
 
   // TODO:  render.
   // TODO: DELETE THIS LATER!!!
+  OBJ bunny("../../objects/cube.obj");
 
 
   shaderProgram_.bind();

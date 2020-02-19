@@ -52,7 +52,7 @@ public:
                     out_vertices.push_back(x);
                     out_vertices.push_back(y);
                     out_vertices.push_back(z);
-                    printf("v: %f %f %f\n", x, y, z);
+                    // printf("v: %f %f %f\n", x, y, z);
                 }
 
                 else if(lineHeader == "vn") {
@@ -63,7 +63,7 @@ public:
                     out_normals.push_back(y);
                     out_normals.push_back(z);
 
-                    printf("vn: %f %f %f\n", x, y, z);
+                    // printf("vn: %f %f %f\n", x, y, z);
                 }
 
                 else if(lineHeader == "f") {
@@ -72,14 +72,23 @@ public:
 
                     printf("\n");
                     printf("f: %d%d %d%d %d%d", v1, n1, v2, n2, v3, n3);
+                    // printf("Pushing: ")
 
 
-                    out_indices.push_back(v1);
-                    out_indices.push_back(n1);
-                    out_indices.push_back(v2);
-                    out_indices.push_back(n2);
-                    out_indices.push_back(v3);
-                    out_indices.push_back(n3);
+                    // out_indices.push_back(v1-1);
+                    // out_indices.push_back(n1-1);
+                    // out_indices.push_back(v2-1);
+                    // out_indices.push_back(n2-1);
+                    // out_indices.push_back(v3-1);
+                    // out_indices.push_back(n3-1);
+
+                    out_indices.push_back(v1-1);
+                    out_indices.push_back(v2-1);
+                    out_indices.push_back(v3-1);
+                    out_indices.push_back(n1-1);
+                    out_indices.push_back(n2-1);
+                    out_indices.push_back(n3-1);
+
 
                     // int vertexIndex[3], normalIndex[3];
                     // vertexIndices.push_back(v1);
@@ -119,16 +128,16 @@ public:
             //     out_normals.push_back(temp_normals[normalIndex - 2]);
             //     out_normals.push_back(temp_normals[normalIndex - 1]);
             // }
-
+            printf("\nPrinted vertices:\n");
             for(int i = 0; i < out_vertices.size(); i++) {
                 printf("%f ", out_vertices[i]);
             }
-            printf("Printed vertices\n");
 
+            printf("\nPrinted normals\n");
             for(int i = 0; i < out_vertices.size(); i++) {
                 printf("%f ", out_normals[i]);
             }
-            printf("Printed normals");
+
         }
 // END
 
