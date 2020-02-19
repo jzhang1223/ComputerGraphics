@@ -8,8 +8,9 @@ BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLB
 {
   setFocusPolicy(Qt::StrongFocus);
   // setup parse objects
-  bunny.parse("../../objects/cube.obj");
-  monkey.parse("../../objects/monkey.obj");
+  bunny.parse("../../objects/bunny_centered.obj");
+  monkey.parse("../../objects/monkey_centered.obj");
+  // current = bunny;
 }
 
 BasicWidget::~BasicWidget()
@@ -95,11 +96,13 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
     update();
   } else if (keyEvent->key() == Qt::Key_1) {
     qDebug() << "1 Key Pressed";
-    // render obj = bunny
+    showBunny = true;
+    setRender(bunny);
     update();
   } else if (keyEvent->key() == Qt::Key_2) {
     qDebug() << "2 Key Pressed";
-    // render obj = monkey
+    showBunny = false;
+    setRender(monkey);
     update();
   } else {
     qDebug() << "You Pressed an unsupported Key!";
@@ -126,22 +129,35 @@ void BasicWidget::initializeGL()
   printf("Running initializeGL()");
 
   // static int indexSize = bunny.out_indices.size();
+  showBunny = true;
+  setRender(bunny);
+
+}
+
+// Always set showBunny before calling setRender
+void BasicWidget::setRender(OBJ image) {
+  // current = image;
+  // if(showBunny) {
+  //   printf("\nimage == bunny\n");
+  //   // showBunny = true;
+  // } else {
+  //   printf("\nimage == bunny\n");
+  //   // showBunny = false;
+  // }
+
 
   shaderProgram_.bind();
 
   vbo_.create();
   vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   vbo_.bind();
-  // vbo_.allocate(verts, 3 * 7 * sizeof(GL_FLOAT));
-  vbo_.allocate(bunny.out_vertices.data(), bunny.out_vertices.size() * sizeof(GL_FLOAT));
+  vbo_.allocate(image.out_vertices.data(), image.out_vertices.size() * sizeof(GL_FLOAT));
 
 
   ibo_.create();
   ibo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   ibo_.bind();
-  // ibo_.allocate(idx, 7 * sizeof(GL_UNSIGNED_INT));
-  // TODO: USE SIZE OF REGULAR INT
-  ibo_.allocate(bunny.out_indices.data(), bunny.out_indices.size() * sizeof(GL_UNSIGNED_INT));
+  ibo_.allocate(image.out_indices.data(), image.out_indices.size() * sizeof(GL_UNSIGNED_INT));
 
 
   vao_.create();
@@ -180,15 +196,20 @@ void BasicWidget::paintGL()
   renderWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   // TODO:  render.
-  printf("Running paingGL()");
+  printf("Running paintGL()");
 
 
   shaderProgram_.bind();
   vao_.bind();
-  glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
+  if (showBunny) {
+    glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
+  } else {
+    glDrawElements(GL_TRIANGLES, monkey.out_indices.size(), GL_UNSIGNED_INT, 0);
+  }
   vao_.release();
   shaderProgram_.release();
 
+  printf(showBunny ? "true" : "false");
 
 
 }
