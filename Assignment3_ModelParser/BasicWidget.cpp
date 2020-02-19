@@ -1,5 +1,4 @@
 #include "BasicWidget.h"
-// #include "obj.cpp"
 
 #include <QByteArray>
 
@@ -8,7 +7,9 @@
 BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLBuffer::VertexBuffer), ibo_(QOpenGLBuffer::IndexBuffer), logger_(this)
 {
   setFocusPolicy(Qt::StrongFocus);
-
+  // setup parse objects
+  bunny.parse("../../objects/cube.obj");
+  monkey.parse("../../objects/monkey.obj");
 }
 
 BasicWidget::~BasicWidget()
@@ -122,28 +123,9 @@ void BasicWidget::initializeGL()
 
   createShader();
 
-  // OBJ monkey("../../objects/monkey.obj");
+  printf("Running initializeGL()");
 
-  // bunny("../../objects/bunny.obj");
-  // OBJ bunny("../../objects/bunny.obj");
-  // bunny = new OBJ("../../objects/bunny.obj");
-  OBJ bunny("../../objects/cube.obj");
   // static int indexSize = bunny.out_indices.size();
-
-
-
-
-  // static const GLfloat verts[21] =
-  // {
-  //   0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Center vertex position
-  //   1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top right vertex position
-  //   -1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f  // Top left vertex position
-  // };
-
-  // static const GLuint idx[3] =
-  // {
-  //     0, 1, 2
-  // };
 
   shaderProgram_.bind();
 
@@ -185,8 +167,6 @@ void BasicWidget::initializeGL()
 void BasicWidget::resizeGL(int w, int h)
 {
   glViewport(0, 0, w, h);
-
-  // some projection stuff was here
 }
 
 void BasicWidget::paintGL()
@@ -200,8 +180,7 @@ void BasicWidget::paintGL()
   renderWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   // TODO:  render.
-  // TODO: DELETE THIS LATER!!!
-  OBJ bunny("../../objects/cube.obj");
+  printf("Running paingGL()");
 
 
   shaderProgram_.bind();
@@ -215,7 +194,7 @@ void BasicWidget::paintGL()
 }
 
 
-
+// END
 
 
 // #include "BasicWidget.h"
