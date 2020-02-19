@@ -15,11 +15,13 @@
 class OBJ {
 
 private:
-        std::vector<QVector3D> out_vertices;
-        // std::vector<QVector2D> out_uvs;
-        std::vector<QVector3D> out_normals;
+
 
 public:
+
+    std::vector<QVector3D> out_vertices;
+    // std::vector<QVector2D> out_uvs;
+    std::vector<QVector3D> out_normals;
 
     OBJ(std::string path) {
 
