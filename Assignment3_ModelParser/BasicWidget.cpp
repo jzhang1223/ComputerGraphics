@@ -126,9 +126,11 @@ void BasicWidget::initializeGL()
 
   createShader();
 
-  printf("Running initializeGL()");
+  // printf("Running initializeGL()");
+  vbo_.create();
+  ibo_.create();
+  vao_.create();
 
-  // static int indexSize = bunny.out_indices.size();
   showBunny = true;
   setRender(bunny);
 
@@ -136,40 +138,24 @@ void BasicWidget::initializeGL()
 
 // Always set showBunny before calling setRender
 void BasicWidget::setRender(OBJ image) {
-  // current = image;
-  // if(showBunny) {
-  //   printf("\nimage == bunny\n");
-  //   // showBunny = true;
-  // } else {
-  //   printf("\nimage == bunny\n");
-  //   // showBunny = false;
-  // }
-
 
   shaderProgram_.bind();
 
-  vbo_.create();
   vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   vbo_.bind();
   vbo_.allocate(image.out_vertices.data(), image.out_vertices.size() * sizeof(GL_FLOAT));
 
 
-  ibo_.create();
   ibo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
   ibo_.bind();
   ibo_.allocate(image.out_indices.data(), image.out_indices.size() * sizeof(GL_UNSIGNED_INT));
 
 
-  vao_.create();
   vao_.bind();
   vbo_.bind();
 
   shaderProgram_.enableAttributeArray(0);
-  // shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3, 7 * sizeof(GL_FLOAT));
   shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3);
-
-  // shaderProgram_.enableAttributeArray(1);
-  // shaderProgram_.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GL_FLOAT), 4, 7 * sizeof(GL_FLOAT));
 
   ibo_.bind();
 
@@ -196,7 +182,7 @@ void BasicWidget::paintGL()
   renderWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   // TODO:  render.
-  printf("Running paintGL()");
+  printf("Running paintGL()\n");
 
 
   shaderProgram_.bind();
@@ -209,6 +195,6 @@ void BasicWidget::paintGL()
   vao_.release();
   shaderProgram_.release();
 
-  printf(showBunny ? "true" : "false");
+  printf(showBunny ? "true\n" : "false\n");
 
 }
