@@ -4,13 +4,11 @@
 
 *TODO*: Please edit the following information in your assignment
 
-* Name and partners name(At most 1 partner for this Assignment): 
-* How many hours did it take you to complete this Assignment? 
-* Did you collaborate or share ideas with any other students/TAs/Professors? 
+* Name and partners name(At most 1 partner for this Assignment): Abhishek
+* How many hours did it take you to complete this Assignment? 10
+* Did you collaborate or share ideas with any other students/TAs/Professors? Asked Gaurav for some help at office hours.
 * Did you use any external resources? 
-  * (tbd if any)
-  * (tbd if any)
-  * (tbd if any)
+- used code from past labs and homeworks
 * (Optional) What was the most interesting part of the assignment? How would you improve this assignment?
   
 ## Description
