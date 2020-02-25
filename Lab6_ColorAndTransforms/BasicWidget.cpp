@@ -205,8 +205,9 @@ void BasicWidget::resizeGL(int w, int h)
 
   model_.setToIdentity();
   model_.translate(0, -.5);
-  model_.scale(.5, .5, 1);
-  // model_.rotate(0, 0, 0, 1);
+  model_.scale(.25, .25, 1);
+  // degrees, (x, y, z) of vector to rotate about
+  model_.rotate(180, 1, 0, 0);
   view_.setToIdentity();
   // view_.rotate(0, 0, 0, 1);
   view_.translate(.5, .5);
