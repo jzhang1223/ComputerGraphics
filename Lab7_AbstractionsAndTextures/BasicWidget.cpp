@@ -63,6 +63,17 @@ void BasicWidget::initializeGL()
   Renderable* ren = new Renderable();
   ren->init(pos, norm, texCoord, idx, texFile);
   renderables_.push_back(ren);
+
+  QVector<QVector3D> pos1;
+  pos1 << QVector3D(-2.8, -0.8, 0.0);
+  pos1 << QVector3D(-1.2, -0.8, 0.0);
+  pos1 << QVector3D(-2.8, 0.8, 0.0);
+  pos1 << QVector3D(-1.2, 0.8, 0.0);
+
+  Renderable* ren1 = new Renderable();
+  ren1->init(pos1, norm, texCoord, idx, texFile);
+  renderables_.push_back(ren1);
+
   glViewport(0, 0, width(), height());
   frameTimer_.start();
 }
