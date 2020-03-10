@@ -64,14 +64,20 @@ void BasicWidget::initializeGL()
   ren->init(pos, norm, texCoord, idx, texFile);
   renderables_.push_back(ren);
 
-  QVector<QVector3D> pos1;
-  pos1 << QVector3D(-2.8, -0.8, 0.0);
-  pos1 << QVector3D(-1.2, -0.8, 0.0);
-  pos1 << QVector3D(-2.8, 0.8, 0.0);
-  pos1 << QVector3D(-1.2, 0.8, 0.0);
+  // QVector<QVector3D> pos1;
+  // pos1 << QVector3D(-1.0, -1.0, 0.0);
+  // pos1 << QVector3D(-0.5, -1.0, 0.0);
+  // pos1 << QVector3D(-1.0, -0.5, 0.0);
+  // pos1 << QVector3D(-0.5, -0.5, 0.0);
 
   Renderable* ren1 = new Renderable();
-  ren1->init(pos1, norm, texCoord, idx, texFile);
+  ren1->init(pos, norm, texCoord, idx, texFile);
+
+  QMatrix4x4 modelMatrix;
+  modelMatrix.setToIdentity();
+  modelMatrix.translate(0.0, 1.0, 0.0);
+  ren1->setModelMatrix(modelMatrix);
+
   renderables_.push_back(ren1);
 
   glViewport(0, 0, width(), height());
