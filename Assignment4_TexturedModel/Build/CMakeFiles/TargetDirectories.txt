@@ -1,0 +1,3 @@
+C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Build/CMakeFiles/App.dir
+C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Build/CMakeFiles/ZERO_CHECK.dir
