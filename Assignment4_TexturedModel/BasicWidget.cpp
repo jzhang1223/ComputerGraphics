@@ -8,10 +8,13 @@ BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLB
 {
   setFocusPolicy(Qt::StrongFocus);
   // setup parse objects
-  currentOBJ.parse("../../objects/bunny_centered.obj");
-  // bunny.parse("../../objects/windmill/windmill.obj");
-  // monkey.parse("../../objects/capsule/capsule.obj");
-  // current = bunny;
+  // currentOBJ.parse("../../objects/bunny_centered.obj");
+
+
+  // currentOBJ.parse("../../objects/capsule/capsule.obj");
+  // currentOBJ.parse("../../objects/chapel/chapel_obj.obj");
+  // currentOBJ.parse("../../objects/house/house_obj.obj");
+  currentOBJ.parse("../../objects/windmill/windmill.obj");
 }
 
 BasicWidget::~BasicWidget()
@@ -127,7 +130,6 @@ void BasicWidget::initializeGL()
 
 }
 
-// Always set showBunny before calling setRender
 void BasicWidget::setRender(OBJ image) {
 
   shaderProgram_.bind();
