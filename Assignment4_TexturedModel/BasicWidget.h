@@ -22,10 +22,10 @@ private:
 
 
   bool renderWireframe = true;
-  bool showBunny = true;
-  OBJ bunny;
-  OBJ monkey;
-  OBJ current;
+  // bool showBunny = true;
+  OBJ currentOBJ;
+  // OBJ monkey;
+  // OBJ current;
   
 protected:
   // Required interaction overrides

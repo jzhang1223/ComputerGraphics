@@ -8,8 +8,7 @@ BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLB
 {
   setFocusPolicy(Qt::StrongFocus);
   // setup parse objects
-  bunny.parse("../../objects/bunny_centered.obj");
-  monkey.parse("../../objects/monkey_centered.obj");
+  currentOBJ.parse("../../objects/bunny_centered.obj");
   // bunny.parse("../../objects/windmill/windmill.obj");
   // monkey.parse("../../objects/capsule/capsule.obj");
   // current = bunny;
@@ -96,16 +95,6 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
     renderWireframe = !renderWireframe;
     // switch to rendering in wireframe mode
     update();
-  } else if (keyEvent->key() == Qt::Key_1) {
-    qDebug() << "1 Key Pressed";
-    showBunny = true;
-    setRender(bunny);
-    update();
-  } else if (keyEvent->key() == Qt::Key_2) {
-    qDebug() << "2 Key Pressed";
-    showBunny = false;
-    setRender(monkey);
-    update();
   } else {
     qDebug() << "You Pressed an unsupported Key!";
   }
@@ -133,8 +122,8 @@ void BasicWidget::initializeGL()
   ibo_.create();
   vao_.create();
 
-  showBunny = true;
-  setRender(bunny);
+  // showBunny = true;
+  setRender(currentOBJ);
 
 }
 
@@ -189,14 +178,15 @@ void BasicWidget::paintGL()
 
   shaderProgram_.bind();
   vao_.bind();
-  if (showBunny) {
-    glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
-  } else {
-    glDrawElements(GL_TRIANGLES, monkey.out_indices.size(), GL_UNSIGNED_INT, 0);
-  }
+  glDrawElements(GL_TRIANGLES, currentOBJ.out_indices.size(), GL_UNSIGNED_INT, 0);
+  // if (showBunny) {
+  //   glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
+  // } else {
+  //   glDrawElements(GL_TRIANGLES, monkey.out_indices.size(), GL_UNSIGNED_INT, 0);
+  // }
   vao_.release();
   shaderProgram_.release();
 
-  printf(showBunny ? "true\n" : "false\n");
+  // printf(showBunny ? "true\n" : "false\n");
 
 }
