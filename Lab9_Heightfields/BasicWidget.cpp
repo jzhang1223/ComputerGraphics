@@ -46,7 +46,7 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
 void BasicWidget::mousePressEvent(QMouseEvent* mouseEvent)
 {
   if (mouseEvent->button() == Qt::LeftButton) {
-    mouseAction_ = Rotate;
+    mouseAction_ = Zoom;
   } else if (mouseEvent->button() == Qt::RightButton) {
     mouseAction_ = Zoom;
   }
@@ -62,9 +62,13 @@ void BasicWidget::mouseMoveEvent(QMouseEvent* mouseEvent)
   lastMouseLoc_ = mouseEvent->pos();
   if (mouseAction_ == Rotate) {
     // TODO:  Implement rotating the camera
+	  qDebug() << "Rotating by: " << delta;
   } else if (mouseAction_ == Zoom) {
     // TODO:  Implement zoom by moving the camera
     // Zooming is moving along the gaze direction by some amount.
+	  qDebug() << "Zooming";
+	  //camera_.zoom();
+	  // camera_.translateLookAt(QVector3D(delta));
   } 
   update();
 }
