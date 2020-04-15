@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\Build\App_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\BasicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\TerrainQuad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\UnitQuad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Lab9_Heightfields\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C35B04FE-3D43-32E9-9034-2C22B4DA2B17}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
