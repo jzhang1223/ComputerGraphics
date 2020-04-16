@@ -33,5 +33,6 @@ uniform PointLight pointLights[1];  // Our lights
 
 void main() {
   // Set our output fragment color to whatever we pull from our input texture (Note, change 'tex' to whatever the sampler is named)
-  fragColor = texture(colorTex, texCoords);
+  //fragColor = texture(colorTex, texCoords);
+  fragColor = vec4(vec3(1.0 - texture(colorTex, texCoords)), 1.0);
 }
