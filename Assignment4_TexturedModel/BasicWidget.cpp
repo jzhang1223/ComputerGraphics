@@ -111,18 +111,18 @@ void BasicWidget::initializeGL()
     // }
     // TODO: GET PROPER IDX??
     for(int i = 0; i < pos.size(); i += 1) {
-        for(int j = 0; j < i; j += 1) {
+        // for(int j = 0; j < i; j += 1) {
           // std::cout << pos[j] << "\n";
           // std::cout << pos[i] << "\n";
           // std::cout << texCoord[j] << "\n";
           // std::cout << texCoord[i] << "\n";
 
-          if(qFuzzyCompare(pos[j],pos[i]) && qFuzzyCompare(texCoord[j],texCoord[i])) {
-            // std::cout << j << "\n";
-            idx << j;
-            break;
-          }
-        }
+        //   if(qFuzzyCompare(pos[j],pos[i]) && qFuzzyCompare(texCoord[j],texCoord[i])) {
+        //     // std::cout << j << "\n";
+        //     idx << j;
+        //     break;
+        //   }
+        // }
         // std::cout << i << "...out\n";
         idx << i;
     }
