@@ -31,10 +31,38 @@ uniform sampler2D tex;              // our primary texture
 uniform mat4 view;                  // we need the view matrix for highlights
 uniform PointLight pointLights[1];  // Our lights
 
+vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
+
+  vec3 lightDir = normalize(light.position - fragPos);
+
+  // diffuse shading
+  float diff = max(dot(normal, lightDir), 0.0);
+
+  // specular shading
+  vec3 reflectDir = reflect(-lightDir, normal);
+  float spec = pow(max(dot(viewDir, reflectDir), 0.0), 10);
+
+  // attenuation
+  float distance = length(light.position - fragPos);
+
+  vec3 ambient = light.ambientIntensity * light.color;
+  vec3 diffuse = light.color * diff;
+  vec3 specular = light.specularIntensity * spec * light.color;
+
+  return (ambient + diffuse + specular);
+
+}
+
 void main() {
   // Set our output fragment color to whatever we pull from our input texture (Note, change 'tex' to whatever the sampler is named)
-  fragColor = texture(tex, texCoords);
+  vec3 diffuse = texture(tex, texCoords).rgb;
 
-  // TODO:  Implement some form of lighting.
-  
+  vec3 normal = normalize(norm);
+  vec3 viewPos = vec3(0.0, 0.0, 0.0);
+  vec3 viewDir = normalize(viewPos - fragPos);
+
+  vec3 lighting;
+  lighting = CalcPointLight(pointLights[0], norm, fragPos, viewDir);
+
+  fragColor = vec4(diffuse * lighting, 1.0); 
 }
