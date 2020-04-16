@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\Build\App_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\BasicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment5_NormalMappedModel\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9DA31A08-E882-37CB-9EDF-7CFE20BD15C8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
