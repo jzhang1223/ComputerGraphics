@@ -17,5 +17,5 @@ void Emitter::update(unsigned int msSinceLastFrame) {
 }
 
 void Emitter::emitParticle() {
-    particles_.append(new Renderable());
+    particles_.append(new Particle(particleModel_, orientation_, 10.0f));
 }
