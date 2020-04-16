@@ -50,18 +50,16 @@ void BasicWidget::initializeGL()
 
   // QString texFile = "../../cat3.ppm";
   QString start = "../../objects";
-  QString texFile = start + "/windmill/windmill_diffuse.ppm";
+  QString texFile;
   QVector<QVector3D> pos;
   QVector<QVector3D> norm;
   QVector<QVector2D> texCoord;
   QVector<uint> idx;
 
+
   if(false) {
-    // QString texFile = "../../cat3.ppm";
-    // QVector<QVector3D> pos;
-    // QVector<QVector3D> norm;
-    // QVector<QVector2D> texCoord;
-    // QVector<uint> idx;
+    // Lab 7 Works here
+    texFile = "../../cat3.ppm";
   
     pos << QVector3D(-0.8, -0.8, 0.0);
     pos << QVector3D(0.8, -0.8, 0.0);
@@ -81,7 +79,8 @@ void BasicWidget::initializeGL()
     texCoord << QVector2D(0.0, 0.0);
   }
   else {
-
+    // Assignment 4 Case
+    texFile = start + "/windmill/windmill_diffuse.ppm";
     OBJ currentOBJ;
     currentOBJ.parse("../../objects/windmill/windmill.obj");
     // for(int i = 0; i < currentOBJ.out_vertices.size(); i += 3) {
@@ -119,7 +118,7 @@ void BasicWidget::initializeGL()
           // std::cout << texCoord[i] << "\n";
 
           if(qFuzzyCompare(pos[j],pos[i]) && qFuzzyCompare(texCoord[j],texCoord[i])) {
-            std::cout << j << "\n";
+            // std::cout << j << "\n";
             idx << j;
             break;
           }
@@ -140,22 +139,6 @@ void BasicWidget::initializeGL()
   Renderable* ren = new Renderable();
   ren->init(pos, norm, texCoord, idx, texFile);
   renderables_.push_back(ren);
-
-  // QVector<QVector3D> pos1;
-  // pos1 << QVector3D(-1.0, -1.0, 0.0);
-  // pos1 << QVector3D(-0.5, -1.0, 0.0);
-  // pos1 << QVector3D(-1.0, -0.5, 0.0);
-  // pos1 << QVector3D(-0.5, -0.5, 0.0);
-
-  // Renderable* ren1 = new Renderable();
-  // ren1->init(pos, norm, texCoord, idx, texFile);
-
-  // QMatrix4x4 modelMatrix;
-  // modelMatrix.setToIdentity();
-  // modelMatrix.translate(0.0, 1.0, 0.0);
-  // ren1->setModelMatrix(modelMatrix);
-
-  // renderables_.push_back(ren1);
 
   glViewport(0, 0, width(), height());
   frameTimer_.start();
@@ -179,6 +162,7 @@ void BasicWidget::resizeGL(int w, int h)
   view_.lookAt(QVector3D(0.0f, 0.0f, 2.0f),
       QVector3D(0.0f, 0.0f, 0.0f),
       QVector3D(0.0f, 1.0f, 0.0f));
+  view_.scale(0.5f);
   projection_.setToIdentity();
   projection_.perspective(70.f, (float)w/(float)h, 0.001, 1000.0);
   glViewport(0, 0, w, h);
