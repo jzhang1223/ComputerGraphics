@@ -5,10 +5,11 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtOpenGL>
-// #include "obj.cpp"
 
 // Lab application
-#include "Application.h"
+#include "App.h"
+
+static bool enableGLDebug = true;
 
 int main(int argc, char** argv) {
   QApplication a(argc, argv);
@@ -18,11 +19,14 @@ int main(int argc, char** argv) {
   QSurfaceFormat fmt;
   fmt.setDepthBufferSize(24);
   fmt.setStencilBufferSize(8);
-  fmt.setVersion(3,3);
+  // fmt.setVersion(3,3);
   fmt.setProfile(QSurfaceFormat::CoreProfile);
+  if(enableGLDebug) {
+    fmt.setOption(QSurfaceFormat::DebugContext);
+  }
   QSurfaceFormat::setDefaultFormat(fmt);
   
-  Application app;
+  App app;
   app.show();
   return QApplication::exec();
 }

@@ -450,8 +450,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\Build\App_autogen\mocs_compilation.cpp" />
-    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\Application.cpp" />
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\App.cpp" />
     <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\BasicWidget.cpp" />
+    <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\Renderable.cpp" />
     <ClCompile Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment4_TexturedModel\main.cpp" />
   </ItemGroup>
   <ItemGroup>

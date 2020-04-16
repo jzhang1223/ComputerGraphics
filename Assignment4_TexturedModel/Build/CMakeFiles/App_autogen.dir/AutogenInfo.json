@@ -8,14 +8,19 @@
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Application.h",
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/App.h",
 			"Mu",
-			"EWIEGA46WW/moc_Application.cpp"
+			"EWIEGA46WW/moc_App.cpp"
 		],
 		[
 			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/BasicWidget.h",
 			"Mu",
 			"EWIEGA46WW/moc_BasicWidget.cpp"
+		],
+		[
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Renderable.h",
+			"Mu",
+			"EWIEGA46WW/moc_Renderable.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -86,11 +91,15 @@
 	"SOURCES" : 
 	[
 		[
-			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Application.cpp",
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/App.cpp",
 			"Mu"
 		],
 		[
 			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/BasicWidget.cpp",
+			"Mu"
+		],
+		[
+			"C:/Users/Justin Zhang/Documents/CS4300/ComputerGraphics/Assignment4_TexturedModel/Renderable.cpp",
 			"Mu"
 		],
 		[

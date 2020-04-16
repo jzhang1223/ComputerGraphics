@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QtOpenGL>
 
+#include "Renderable.h"
 #include "obj.cpp"
 
 /**
@@ -14,19 +15,17 @@ class BasicWidget : public QOpenGLWidget, protected QOpenGLFunctions
   Q_OBJECT
 
 private:
-  QString vertexShaderString() const;
-  QString fragmentShaderString() const;
-  void createShader();
-  QOpenGLVertexArrayObject vao_;
-
-
-
-  bool renderWireframe = true;
-  // bool showBunny = true;
-  OBJ currentOBJ;
-  // OBJ monkey;
-  // OBJ current;
+  QMatrix4x4 model_;
+  QMatrix4x4 view_;
+  QMatrix4x4 projection_;
   
+  QElapsedTimer frameTimer_;
+
+  QVector<Renderable*> renderables_;
+
+  QOpenGLDebugLogger logger_;
+  bool renderWireframe = false;
+
 protected:
   // Required interaction overrides
   void keyReleaseEvent(QKeyEvent* keyEvent) override;
@@ -35,16 +34,6 @@ protected:
   void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
-
-  QOpenGLBuffer vbo_;
-  QOpenGLBuffer ibo_;
-
-  QOpenGLShaderProgram shaderProgram_;
-  QOpenGLDebugLogger logger_;
-
-  void setRender(OBJ image);
-
-
   
 public:
   BasicWidget(QWidget* parent=nullptr);

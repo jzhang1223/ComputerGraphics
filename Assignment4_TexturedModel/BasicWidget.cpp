@@ -1,98 +1,34 @@
 #include "BasicWidget.h"
-
-#include <QByteArray>
+#include <iostream>
 
 //////////////////////////////////////////////////////////////////////
 // Publics
-BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), vbo_(QOpenGLBuffer::VertexBuffer), ibo_(QOpenGLBuffer::IndexBuffer), logger_(this)
+BasicWidget::BasicWidget(QWidget* parent) : QOpenGLWidget(parent), logger_(this)
 {
   setFocusPolicy(Qt::StrongFocus);
-  // setup parse objects
-  // currentOBJ.parse("../../objects/bunny_centered.obj");
-
-
-  // currentOBJ.parse("../../objects/capsule/capsule.obj");
-  // currentOBJ.parse("../../objects/chapel/chapel_obj.obj");
-  // currentOBJ.parse("../../objects/house/house_obj.obj");
-  currentOBJ.parse("../../objects/windmill/windmill.obj");
 }
 
 BasicWidget::~BasicWidget()
 {
-  vbo_.release();
-  vbo_.destroy();
-  ibo_.release();
-  ibo_.destroy();
-  vao_.release();
-  vao_.destroy();
+    for (auto renderable : renderables_) {
+        delete renderable;
+    }
+    renderables_.clear();
 }
 
 //////////////////////////////////////////////////////////////////////
 // Privates
-QString BasicWidget::vertexShaderString() const
-{
-  QString str =
-    "#version 330\n"
-    "layout(location = 0) in vec3 position;\n"
-    // "layout(location = 1) in vec4 color;\n"
-
-    "uniform mat4 modelMatrix;\n"
-    "uniform mat4 viewMatrix;\n"
-    "uniform mat4 projectionMatrix;\n"
-    
-    "out vec4 vertColor;\n"
-
-    "void main()\n"
-    "{\n"
-    "  gl_Position = vec4(position, 1.0);\n"
-    "  vertColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
-    "}\n";
-  return str;
-}
-
-QString BasicWidget::fragmentShaderString() const
-{
-  QString str =
-  "#version 330\n"
-    "in vec4 vertColor;\n"
-  "out vec4 color;\n"
-  "void main()\n"
-  "{\n"
-  "  color = vertColor;\n"
-  "}\n";
-  return str;
-}
-
-void BasicWidget::createShader()
-{
-  QOpenGLShader vert(QOpenGLShader::Vertex);
-  vert.compileSourceCode(vertexShaderString());
-  QOpenGLShader frag(QOpenGLShader::Fragment);
-  frag.compileSourceCode(fragmentShaderString());
-  bool ok = shaderProgram_.addShader(&vert);
-  if(!ok) {
-  qDebug() << shaderProgram_.log();
-  }
-  ok = shaderProgram_.addShader(&frag);
-  if(!ok) {
-  qDebug() << shaderProgram_.log();
-  }
-  ok = shaderProgram_.link();
-  if(!ok) {
-  qDebug() << shaderProgram_.log();
-  }
-}
-
 ///////////////////////////////////////////////////////////////////////
 // Protected
 void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
 {
-  // TODO
   // Handle key events here.
-  printf("%s\n", keyEvent->text());
-  if (keyEvent->key() == Qt::Key_Q) {
-    qDebug() << "Q Key Pressed";
-    QCoreApplication::quit(); // exits with return code 0
+  if (keyEvent->key() == Qt::Key_Left) {
+    qDebug() << "Left Arrow Pressed";
+    update();  // We call update after we handle a key press to trigger a redraw when we are ready
+  } else if (keyEvent->key() == Qt::Key_Right) {
+    qDebug() << "Right Arrow Pressed";
+    update();  // We call update after we handle a key press to trigger a redraw when we are ready
   } else if (keyEvent->key() == Qt::Key_W) {
     qDebug() << "W Key Pressed";
     renderWireframe = !renderWireframe;
@@ -101,94 +37,168 @@ void BasicWidget::keyReleaseEvent(QKeyEvent* keyEvent)
   } else {
     qDebug() << "You Pressed an unsupported Key!";
   }
-  // ENDTODO
 }
-
 void BasicWidget::initializeGL()
 {
   makeCurrent();
   initializeOpenGLFunctions();
 
-  QOpenGLContext* curContext = this->context();
-  qDebug() << "[BasicWidget]::initializeGL() -- Context Information:";
-  qDebug() << "  Context Valid: " << std::string(curContext->isValid() ? "true" : "false").c_str();
-  qDebug() << "  GL Version Used: " << curContext->format().majorVersion() << "." << curContext->format().minorVersion();
-  qDebug() << "  Vendor: " << reinterpret_cast<const char*>(glGetString(GL_VENDOR));
-  qDebug() << "  Renderer: " << reinterpret_cast<const char*>(glGetString(GL_RENDERER));
-  qDebug() << "  Version: " << reinterpret_cast<const char*>(glGetString(GL_VERSION));
-  qDebug() << "  GLSL Version: " << reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+  qDebug() << QDir::currentPath();
+  
+  qDebug() << "HERE***********";
+  std::cout << "HEREHEEEEE********";
 
-  createShader();
+  // QString texFile = "../../cat3.ppm";
+  QString start = "../../objects";
+  QString texFile = start + "/windmill/windmill_diffuse.ppm";
+  QVector<QVector3D> pos;
+  QVector<QVector3D> norm;
+  QVector<QVector2D> texCoord;
+  QVector<uint> idx;
 
-  // printf("Running initializeGL()");
-  vbo_.create();
-  ibo_.create();
-  vao_.create();
+  if(false) {
+    // QString texFile = "../../cat3.ppm";
+    // QVector<QVector3D> pos;
+    // QVector<QVector3D> norm;
+    // QVector<QVector2D> texCoord;
+    // QVector<uint> idx;
+  
+    pos << QVector3D(-0.8, -0.8, 0.0);
+    pos << QVector3D(0.8, -0.8, 0.0);
+    pos << QVector3D(-0.8, 0.8, 0.0);
+    pos << QVector3D(0.8, 0.8, 0.0);
+  // We don't actually use the normals right now, but this will be useful later!
+    // norm << QVector3D(0.0, 0.0, 1.0);
+    // norm << QVector3D(0.0, 0.0, 1.0);
+    // norm << QVector3D(0.0, 0.0, 1.0);
+    // norm << QVector3D(0.0, 0.0, 1.0);
+  // TODO:  Make sure to add texture coordinates to pass into the initialization of our renderable
+    idx << 0 << 1 << 2 << 2 << 1 << 3;
 
-  // showBunny = true;
-  setRender(currentOBJ);
+    texCoord << QVector2D(1.0, 1.0);
+    texCoord << QVector2D(1.0, 0.0);
+    texCoord << QVector2D(0.0, 1.0);
+    texCoord << QVector2D(0.0, 0.0);
+  }
+  else {
 
-}
+    OBJ currentOBJ;
+    currentOBJ.parse("../../objects/windmill/windmill.obj");
+    // for(int i = 0; i < currentOBJ.out_vertices.size(); i += 3) {
+    //     pos += QVector3D(currentOBJ.out_vertices[i], currentOBJ.out_vertices[i+1], currentOBJ.out_vertices[i+2]);
+    // }
+    for(int i = 0; i < currentOBJ.out_indices.size(); i += 3) {
+      // std::cout << i << "...1\n";
+        // pos << QVector3D(currentOBJ.out_vertices[i], currentOBJ.out_vertices[i+1], currentOBJ.out_vertices[i+2]);
+        pos << QVector3D(currentOBJ.out_vertices[currentOBJ.out_indices[i]], currentOBJ.out_vertices[currentOBJ.out_indices[i+1]], currentOBJ.out_vertices[currentOBJ.out_indices[i+2]]);
+    }
+    // for(int i = 0; i < currentOBJ.out_texs.size(); i += 2) {
+        // texCoord += QVector2D(currentOBJ.out_texs[i], currentOBJ.out_texs[i+1]);
+    // }
 
-void BasicWidget::setRender(OBJ image) {
 
-  shaderProgram_.bind();
-
-  vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
-  vbo_.bind();
-  vbo_.allocate(image.out_vertices.data(), image.out_vertices.size() * sizeof(GL_FLOAT));
+    for(int i = 0; i < currentOBJ.out_texIndices.size(); i += 3) {
+        // std::cout << i << "...2\n";
+        texCoord << QVector2D(currentOBJ.out_texs[currentOBJ.out_texIndices[i]], currentOBJ.out_texs[currentOBJ.out_texIndices[i+1]]);
+    }
 
 
-  ibo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
-  ibo_.bind();
-  ibo_.allocate(image.out_indices.data(), image.out_indices.size() * sizeof(GL_UNSIGNED_INT));
+    // for(int i = 0; i < currentOBJ.out_normals.size(); i += 3) {
+    //     norm += QVector3D(currentOBJ.out_normals[i], currentOBJ.out_normals[i+1], currentOBJ.out_normals[i+2]);
+    // }
+    printf("DID DID SOMETHING\n");
+    // for(uint index: currentOBJ.out_indices) {
+    //   idx += index;
+    // }
+    // TODO: GET PROPER IDX??
+    for(int i = 0; i < pos.size(); i += 1) {
+        for(int j = 0; j < i; j += 1) {
+          // std::cout << pos[j] << "\n";
+          // std::cout << pos[i] << "\n";
+          // std::cout << texCoord[j] << "\n";
+          // std::cout << texCoord[i] << "\n";
 
+          if(qFuzzyCompare(pos[j],pos[i]) && qFuzzyCompare(texCoord[j],texCoord[i])) {
+            std::cout << j << "\n";
+            idx << j;
+            break;
+          }
+        }
+        // std::cout << i << "...out\n";
+        idx << i;
+    }
+    // pos = currentOBJ.getVertices();
+    // norm = currentOBJ.getNormals();
+    // texCoord = currentOBJ.getTexs();
+    // idx = currentOBJ.out_indices.data();
+    std::cout << idx.size();
 
-  vao_.bind();
-  vbo_.bind();
+  }
 
-  shaderProgram_.enableAttributeArray(0);
-  shaderProgram_.setAttributeBuffer(0, GL_FLOAT, 0, 3);
+  // PARSING OBJ COMPLETE HERE
 
-  ibo_.bind();
+  Renderable* ren = new Renderable();
+  ren->init(pos, norm, texCoord, idx, texFile);
+  renderables_.push_back(ren);
 
-  vao_.release();
-  shaderProgram_.release();
+  // QVector<QVector3D> pos1;
+  // pos1 << QVector3D(-1.0, -1.0, 0.0);
+  // pos1 << QVector3D(-0.5, -1.0, 0.0);
+  // pos1 << QVector3D(-1.0, -0.5, 0.0);
+  // pos1 << QVector3D(-0.5, -0.5, 0.0);
 
+  // Renderable* ren1 = new Renderable();
+  // ren1->init(pos, norm, texCoord, idx, texFile);
+
+  // QMatrix4x4 modelMatrix;
+  // modelMatrix.setToIdentity();
+  // modelMatrix.translate(0.0, 1.0, 0.0);
+  // ren1->setModelMatrix(modelMatrix);
+
+  // renderables_.push_back(ren1);
 
   glViewport(0, 0, width(), height());
+  frameTimer_.start();
 }
 
 void BasicWidget::resizeGL(int w, int h)
 {
+    if (!logger_.isLogging()) {
+        logger_.initialize();
+        // Setup the logger for real-time messaging
+        connect(&logger_, &QOpenGLDebugLogger::messageLogged, [=]() {
+            const QList<QOpenGLDebugMessage> messages = logger_.loggedMessages();
+            for (auto msg : messages) {
+                qDebug() << msg;
+            }
+            });
+        logger_.startLogging();
+    }
+  glViewport(0, 0, w, h);
+  view_.setToIdentity();
+  view_.lookAt(QVector3D(0.0f, 0.0f, 2.0f),
+      QVector3D(0.0f, 0.0f, 0.0f),
+      QVector3D(0.0f, 1.0f, 0.0f));
+  projection_.setToIdentity();
+  projection_.perspective(70.f, (float)w/(float)h, 0.001, 1000.0);
   glViewport(0, 0, w, h);
 }
 
 void BasicWidget::paintGL()
 {
+  qint64 msSinceRestart = frameTimer_.restart();
   glDisable(GL_DEPTH_TEST);
   glDisable(GL_CULL_FACE);
 
   glClearColor(0.f, 0.f, 0.f, 1.f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  // wireframe check
   renderWireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-  // TODO:  render.
-  printf("Running paintGL()\n");
-
-
-  shaderProgram_.bind();
-  vao_.bind();
-  glDrawElements(GL_TRIANGLES, currentOBJ.out_indices.size(), GL_UNSIGNED_INT, 0);
-  // if (showBunny) {
-  //   glDrawElements(GL_TRIANGLES, bunny.out_indices.size(), GL_UNSIGNED_INT, 0);
-  // } else {
-  //   glDrawElements(GL_TRIANGLES, monkey.out_indices.size(), GL_UNSIGNED_INT, 0);
-  // }
-  vao_.release();
-  shaderProgram_.release();
-
-  // printf(showBunny ? "true\n" : "false\n");
-
+  for (auto renderable : renderables_) {
+      renderable->update(msSinceRestart);
+      renderable->draw(view_, projection_);
+  }
+  update();
 }

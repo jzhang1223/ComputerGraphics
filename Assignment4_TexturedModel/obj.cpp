@@ -38,7 +38,20 @@ public:
                 std::string lineHeader;
                 iss >> lineHeader;
 
-                if(lineHeader == "v") {
+                if(lineHeader == "mtllib") {
+                    std::string mtlName;
+                    iss >> mtlName;
+                }
+
+                else if(lineHeader == "o") {
+                    //
+                }
+
+                else if(lineHeader == "s") {
+                    //
+                }
+
+                else if(lineHeader == "v") {
                     float x, y, z;
                     iss >> x >> y >> z;
                     out_vertices.push_back(x);
@@ -46,7 +59,7 @@ public:
                     out_vertices.push_back(z);
                     // printf("v: %f %f %f\n", x, y, z);
                 }
-
+                
                 else if(lineHeader == "vt") {
                     float x, y;
                     iss >> x >> y;
@@ -79,23 +92,44 @@ public:
                 }
             }
             printf("Done parsing!\n");
+            printf("%d\n", out_indices.size());
+            printf("%d\n", out_texIndices.size());
 
-            // printf("\nPrinted vertices:\n");
-            // for(int i = 0; i < out_vertices.size(); i++) {
-            //     printf("%f ", out_vertices[i]);
-            //     if (i % 3 == 2) {
-            //         printf("\n");
-            //     }
-            // }
-
-            // printf("\nPrinted normals\n");
-            // for(int i = 0; i < out_vertices.size(); i++) {
-            //     printf("%f ", out_normals[i]);
-            //     if (i % 3 == 2) {
-            //         printf("\n");
-            //     }
-            // }
         }
 
     }
+
+    // QVector<QVector3D> getVertices() {
+    //     QVector<QVector3D> result;
+    //     for(int i = 0; i < out_vertices.size(); i += 3) {
+    //         result << QVector3D(out_vertices[i], out_vertices[i+1], out_vertices[i+2]);
+    //     }
+    //     return result;
+    // }
+
+    // QVector<QVector2D> getTexs() {
+    //     QVector<QVector2D> result;
+    //     for(int i = 0; i < out_texs.size(); i += 2) {
+    //         result << QVector3D(out_texs[i], out_texs[i+1]);
+    //     }
+    //     return result;
+    // }
+
+    // QVector<QVector3D> getNormals() {
+    //     QVector<QVector3D> result;
+    //     for(int i = 0; i < out_normals.size(); i += 3) {
+    //         result << QVector3D(out_normals[i], out_normals[i+1], out_normals[i+2]);
+    //     }
+    //     return result;
+    // }
+
+
+
+    /*
+    std::vector<float> out_vertices;
+    std::vector<float> out_texs;
+    std::vector<float> out_normals;
+    std::vector<uint> out_indices;
+    std::vector<uint> out_texIndices;
+    */
 };
