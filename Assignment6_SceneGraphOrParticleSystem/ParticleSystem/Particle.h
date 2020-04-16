@@ -1,5 +1,5 @@
 #include <QtGui>
-#include Renderable
+#include "Renderable.h"
 
 class particle {
     protected:

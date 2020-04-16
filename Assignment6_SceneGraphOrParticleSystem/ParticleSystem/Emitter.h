@@ -1,6 +1,6 @@
 #include <QtGui>
-#include Renderable.h
-#include Particle.h
+#include "Renderable.h"
+#include "Particle.h"
 
 class Emitter {
     protected:

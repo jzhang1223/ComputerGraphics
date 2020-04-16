@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Justin Zhang\Documents\CS4300\ComputerGraphics\Assignment6_SceneGraphOrParticleSystem\ParticleSystem\Build\CMakeFiles\922162c51013e685b531a826f42540fb\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D49555C7-976F-3454-A369-0DC156DDAE8A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
